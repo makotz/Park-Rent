@@ -1,0 +1,19 @@
+<h1><%= current_user.first_name%>'s Profile</h1>
+
+<h2>My Parking Spots</h2>
+<% current_user.parkingspots.each do |parkingspot| %>
+  <%= link_to "#{parkingspot.title}", parkingspot_path(parkingspot) %> (<%= parkingspot.address %>)
+  <hr>
+<% end %>
+
+<h2>Manage My Parkingspots</h2>
+<%= render "managementcalendar" %>
+
+
+<h2>My Reservations</h2>
+<% current_user.rentals.each do |rental| %>
+  <h3>Parking spot: <%= rental.parkingspot.title %></h3>
+  <h3>Event: <%= rental.event.title %></h3>
+  Time:(<%= rental.start %> - <%= rental.end %>)
+  <hr>
+<% end %>

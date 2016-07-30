@@ -1,0 +1,10 @@
+<h1>Register Parking Spot</h1>
+<%= simple_form_for(@parkingspot, url: user_parkingspots_path(current_user)) do |f| %>
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :address %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.input :country %>
+    <%= f.button :submit, class: "btn-primary" %>
+<% end %>

@@ -1,0 +1,19 @@
+
+<h1>Schedule</h1>
+
+<div id="calendar"></div>
+<script>
+$(document).ready(function() {
+    $('#calendar').html("")
+    $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,today,next',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        defaultView :'month',
+        height: 600,
+        events: "/parkingspots/" + <%= @parkingspot.id %> +'/schedule.json'
+    });
+});
+</script>

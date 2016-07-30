@@ -1,0 +1,31 @@
+<h1><%= @parkingspot.title %></h1>
+
+
+<h2>Details: <%= @parkingspot.description %></h2>
+
+<%= render "calendar" %>
+
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
+
+<script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers([
+      {
+        "lat": <%= @parkingspot.latitude %>,
+        "lng": <%= @parkingspot.longitude %>,
+        "infowindow": "<%= @parkingspot.title %>"
+      }
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+</script>
+
+<script>
+  $('#calendar').click(function(){
+    console.log("Hello");
+  });
+</script>
