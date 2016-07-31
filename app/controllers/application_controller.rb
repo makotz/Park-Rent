@@ -7,14 +7,11 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
-  helper_method :current_user
-  # if we need methods to be available in view files we will need to add
-  # `helper_method` and the first argument is the method name as a symbol
 
   def user_signed_in?
     session[:user_id].present?
   end
-  helper_method :user_signed_in?
+  helper_method
 
   def sign_in(user)
     session[:user_id] = user.id
@@ -24,9 +21,7 @@ class ApplicationController < ActionController::Base
     redirect_to new_session_path, alert: "please sign in" unless user_signed_in?
   end
 
-  def current_question
-    @current_question ||= Question.find params[:question_id]
-  end
-  helper_method :current_question
 
+
+  helper_method :user_signed_in?, :current_user
 end

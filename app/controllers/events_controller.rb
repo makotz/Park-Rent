@@ -9,16 +9,31 @@ class EventsController < ApplicationController
     @event = Event.new event_params
     @event.user = current_user
     if @event.save
-      flash[:notice] = "Place added!"
+      flash[:notice] = 'Event: "#{@event.title}" has been added!'
       redirect_to event_path(@event)
     else
       render :new
     end
   end
 
+  def edit
+    @event = Event.find params[:id]
+  end
+
+  def update
+    @event = Event.find params[:id]
+    if @event.update event_params
+      redirect_to event_path(@event), notice: "Event info updated."
+    else
+      render :edit, alert: "Sorry, update did not go through..."
+    end
+  end
+
+
   def show
     current_user
     @event = Event.find params[:id]
+    @offer_parking = current_user.parkingspots.within_radius(WALKING_DISTANCE, @event.latitude, @event.longitude).order_by_distance(@event.latitude, @event.longitude)
     @parkingspots = @event.available_parkingspots
     @markers_hash = Gmaps4rails.build_markers(@parkingspots) do |campaign, marker|
                   marker.lat campaign.latitude
@@ -45,9 +60,15 @@ class EventsController < ApplicationController
     r[0]
   end
 
-  helper_method :find_rentals
+  def event_owner?
+    current_user == @event.user
+  end
+
+  helper_method :find_rentals, :event_owner?
 
   private
+
+  WALKING_DISTANCE = 560
 
   def event_params
     params.require(:event).permit(:title, :description, :address, :start, :end, :city, :state, :country)

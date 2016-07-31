@@ -15,9 +15,9 @@ class Event < ActiveRecord::Base
 
 
   # if city.exists?
-  #   geocoded_by :full_street_address
+    geocoded_by :full_street_address
   # else
-    geocoded_by :address
+    # geocoded_by :address
   # end
 
   after_validation :geocode

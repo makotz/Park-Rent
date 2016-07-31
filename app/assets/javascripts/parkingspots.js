@@ -1,7 +1,9 @@
 // AJAX for the INDEX page
 var url = "parkingspots/"
 
-$(function () {
+
+$(document).ready(function () {
+
   $('#starttime').datetimepicker();
 
   $('#endtime').datetimepicker({

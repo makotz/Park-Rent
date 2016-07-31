@@ -1,5 +1,5 @@
 <h1>Add Event</h1>
-<%= simple_form_for(@event, url:user_events_path(current_user)) do |f| %>
+<%= simple_form_for(@event, url:user_event_path(current_user, @event)) do |f| %>
 <%= f.input :title %>
 <%= f.input :description %>
 <%= f.input :address %>

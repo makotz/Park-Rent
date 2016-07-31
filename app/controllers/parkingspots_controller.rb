@@ -10,8 +10,8 @@ class ParkingspotsController < ApplicationController
     @parkingspot = Parkingspot.new parkingspot_params
     @parkingspot.user = current_user
     if @parkingspot.save
-      flash[:notice] = "Place added!"
-      redirect_to root_path
+      flash[:notice] = "Parkingspot: #{@parkingspot.title} added!"
+      redirect_to parkingspot_path(@parkingspot)
     else
       render 'new'
     end
@@ -64,7 +64,7 @@ class ParkingspotsController < ApplicationController
       format.json {render json: @parkingspots}
       format.html
     end
-    
+
   end
 
   private

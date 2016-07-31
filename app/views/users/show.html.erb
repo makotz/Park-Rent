@@ -1,4 +1,4 @@
-<h1><%= current_user.first_name%>'s Profile</h1>
+<h1>My Profile</h1>
 
 <h2>My Parking Spots</h2>
 <% current_user.parkingspots.each do |parkingspot| %>
@@ -15,5 +15,11 @@
   <h3>Parking spot: <%= rental.parkingspot.title %></h3>
   <h3>Event: <%= rental.event.title %></h3>
   Time:(<%= rental.start %> - <%= rental.end %>)
+  <hr>
+<% end %>
+
+<h2>My Events</h2>
+<% current_user.events.each do |event| %>
+  <p><%= link_to "#{event.title}", event_path(event)%></p>
   <hr>
 <% end %>

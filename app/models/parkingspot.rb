@@ -12,12 +12,13 @@ class Parkingspot < ActiveRecord::Base
   [address, city, state, country].compact.join(', ')
   end
 
+
   # if city.exists?
-  #   geocoded_by :full_street_address
+    geocoded_by :full_street_address
   # else
-    geocoded_by :address
+    # geocoded_by :address
   # end
 
   after_validation :geocode
-
+  acts_as_geolocated
 end

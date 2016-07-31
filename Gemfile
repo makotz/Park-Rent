@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'activerecord-postgres-earthdistance'
 gem 'as-duration'
 gem 'faker'
 gem 'bootstrap3-datetimepicker-rails'
