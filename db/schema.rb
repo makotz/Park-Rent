@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160730195352) do
+ActiveRecord::Schema.define(version: 20160801195322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,26 +35,29 @@ ActiveRecord::Schema.define(version: 20160730195352) do
     t.string   "address"
     t.float    "longitude"
     t.float    "latitude"
-    t.datetime "created_at",  :null=>false
-    t.datetime "updated_at",  :null=>false
-    t.integer  "user_id",     :index=>{:name=>"index_events_on_user_id"}, :foreign_key=>{:references=>"users", :name=>"fk_rails_0cb5590091", :on_update=>:no_action, :on_delete=>:no_action}
+    t.datetime "created_at",      :null=>false
+    t.datetime "updated_at",      :null=>false
+    t.integer  "user_id",         :index=>{:name=>"index_events_on_user_id"}, :foreign_key=>{:references=>"users", :name=>"fk_rails_0cb5590091", :on_update=>:no_action, :on_delete=>:no_action}
     t.string   "city"
     t.string   "state"
     t.string   "country"
+    t.float    "suggested_price"
   end
 
   create_table "parkingspots", force: :cascade do |t|
     t.string   "address"
     t.float    "longitude"
     t.float    "latitude"
-    t.integer  "user_id",     :index=>{:name=>"index_parkingspots_on_user_id"}, :foreign_key=>{:references=>"users", :name=>"fk_rails_6efd4bc4e6", :on_update=>:no_action, :on_delete=>:no_action}
-    t.datetime "created_at",  :null=>false
-    t.datetime "updated_at",  :null=>false
+    t.integer  "user_id",       :index=>{:name=>"index_parkingspots_on_user_id"}, :foreign_key=>{:references=>"users", :name=>"fk_rails_6efd4bc4e6", :on_update=>:no_action, :on_delete=>:no_action}
+    t.datetime "created_at",    :null=>false
+    t.datetime "updated_at",    :null=>false
     t.string   "title"
     t.string   "city"
     t.string   "state"
     t.string   "country"
     t.text     "description"
+    t.float    "default_price"
+    t.boolean  "notification"
   end
 
   create_table "rentals", force: :cascade do |t|

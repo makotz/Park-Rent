@@ -7,6 +7,7 @@ class Parkingspot < ActiveRecord::Base
   validates :user_id, presence: true
   validates :title, presence: true, uniqueness: true
   validates :address, presence: true, uniqueness: true
+  validates_numericality_of :default_price, :only_integer => true, :greater_than_or_equal_to => 0
 
   def full_street_address
   [address, city, state, country].compact.join(', ')

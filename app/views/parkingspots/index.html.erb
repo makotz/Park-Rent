@@ -4,6 +4,7 @@
   <div id='available_parkingspots' class="col-sm-5">
     <% @parkingspots.each do |parkingspot| %>
       <%= link_to "#{parkingspot.title}", parkingspot_path(parkingspot) %> (<%= parkingspot.address %>)
+      Price: $<%= parkingspot.default_price %>/hour
       <hr>
     <% end %>
   </div>

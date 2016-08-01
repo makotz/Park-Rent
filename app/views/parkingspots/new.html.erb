@@ -1,10 +1,13 @@
-<h1>Register Parking Spot</h1>
+<div class="form">
+<legend>Register Parking Spot</legend>
 <%= simple_form_for(@parkingspot, url: user_parkingspots_path(current_user)) do |f| %>
     <%= f.input :title %>
-    <%= f.input :description %>
-    <%= f.input :address %>
-    <%= f.input :city %>
-    <%= f.input :state %>
+    <%= f.input :description, placeholder: 'E.g. House with the red chimney!' %>
     <%= f.input :country %>
-    <%= f.button :submit, class: "btn-primary" %>
+    <%= f.input :state, label: 'Province/State' %>
+    <%= f.input :city %>
+    <%= f.input :address %>
+    <%= f.input :default_price, label: 'Default price per hour', collection: 0..10, selected: 2%>
+    <%= f.button :submit, class: "btn btn-primary" %>
 <% end %>
+</div>

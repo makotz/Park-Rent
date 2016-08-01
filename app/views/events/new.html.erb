@@ -2,11 +2,12 @@
 <%= simple_form_for(@event, url:user_events_path(current_user)) do |f| %>
 <%= f.input :title %>
 <%= f.input :description %>
-<%= f.input :address %>
-<%= f.input :city %>
-<%= f.input :state %>
 <%= f.input :country %>
+<%= f.input :state %>
+<%= f.input :city %>
+<%= f.input :address %>
 <%= f.input :start %>
 <%= f.input :end %>
+<%= f.input :suggested_price, placeholder: "Suggested per hour parking rental" %>
 <%= f.button :submit, class: "btn btn-primary" %>
 <% end %>

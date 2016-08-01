@@ -1,4 +1,4 @@
-<h1>My Profile</h1>
+<h1>My Scoop Profile</h1>
 
 <h2>My Parking Spots</h2>
 <% current_user.parkingspots.each do |parkingspot| %>
@@ -13,7 +13,9 @@
 <h2>My Reservations</h2>
 <% current_user.rentals.each do |rental| %>
   <h3>Parking spot: <%= rental.parkingspot.title %></h3>
-  <h3>Event: <%= rental.event.title %></h3>
+  <% if rental.event != nil %>
+    <h3>Event: <%= rental.event.title %></h3>
+  <% end %>
   Time:(<%= rental.start %> - <%= rental.end %>)
   <hr>
 <% end %>

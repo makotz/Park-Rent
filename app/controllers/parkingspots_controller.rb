@@ -35,6 +35,20 @@ class ParkingspotsController < ApplicationController
 
   def show
     @parkingspot = Parkingspot.find(params[:id])
+    @rental = Rental.new
+  end
+
+  def edit
+    @parkingspot = Parkingspot.find params[:id]
+  end
+
+  def update
+    @parkingspot = Parkingspot.find params[:id]
+    if @parkingspot.update parkingspot_params
+      redirect_to parkingspot_path(@parkingspot), notice: "Event info updated."
+    else
+      render :edit, alert: "Sorry, update did not go through..."
+    end
   end
 
   def index
@@ -67,10 +81,16 @@ class ParkingspotsController < ApplicationController
 
   end
 
+  def parkingspot_owner?
+    current_user == @parkingspot.user
+  end
+
+  helper_method :parkingspot_owner?
+
   private
 
   def parkingspot_params
-    params.require(:parkingspot).permit(:title, :description, :address, :city, :state, :country)
+    params.require(:parkingspot).permit(:title, :description, :address, :city, :state, :country, :default_price)
   end
 
   # def available_parkingspots

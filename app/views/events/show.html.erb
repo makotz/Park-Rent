@@ -1,53 +1,62 @@
-<h1><%= @event.title %></h1>
-<% if user_signed_in? && event_owner? %>
-<%= link_to "Edit Event", edit_user_event_path(current_user, @event) %>
-<%= link_to "Delete Event", user_event_path(current_user, @event), method: :delete %>
-<% end %>
-<h3>Organizer: <%= @event.user.full_name %></h3>
-<h4>Description: <%= @event.description %></h4>
+<div class="form">
+  <h1><%= @event.title %></h1>
+  <% if user_signed_in? && event_owner? %>
+    <%= link_to "Edit Event", edit_user_event_path(current_user, @event) %>
+    <%= link_to "Delete Event", user_event_path(current_user, @event), method: :delete %>
+  <% end %>
 
-<% if !event_owner? %>
-  <% if @offer_parking != [] %>
+  <h3>Organizer: <%= @event.user.full_name %></h3>
+  <h4>Description: <%= @event.description %></h4>
+
+  <% if !event_owner? %>
+  <% if current_user.parkingspots.empty? %>
+  <% elsif @myparkingspots %>
     <h2>Offer my nearby parkingspot(s)</h2>
-    <% @offer_parking.each do |parkingspot| %>
-      <% if !Rental.where(parkingspot_id: parkingspot).where(event_id: @event) %>
-      <%= link_to "#{parkingspot.title}", event_parkingspot_rentals_path(@event, parkingspot.id), method: :post %>
+    <% @myparkingspots.each do |parkingspot| %>
+        <%= link_to "#{parkingspot.title}", event_parkingspot_rentals_path(@event, parkingspot.id), method: :post %>
+      <hr>
+    <% end %>
+  <% else %>
+    <h2>No spots I own are in walking distance</h2>
+  <% end %>
+  <% end %>
+
+  <% if @eventparking != [] %>
+    <h2>Event Parkingspots (Parking price: <%= @event.suggested_price %>)</h2>
+    <% @eventparking.each do |parkingspot| %>
+      <%= parkingspot.title %> (<%= parkingspot.full_street_address %>)
+      <% if parkingspot.user != current_user %>
+        <%= link_to "Rent this spot", event_parkingspot_rental_path(@event, parkingspot, find_rentals(@event, parkingspot)), method: :patch %>
       <% end %>
       <hr>
     <% end %>
-<% else %>
-    <h2>No parkingspots I own are in walking distance</h2>
+  <% else %>
+    <h2> No Parkingspots offered at the moment...</h2>
   <% end %>
-<% end %>
 
-<% if @parkingspots.length != 0 %>
-  <h2>Offered Parkingspots</h2>
-  <% @parkingspots.each do |parkingspot| %>
-    <%= parkingspot.title %> (<%= parkingspot.full_street_address %>)
-    <% if parkingspot.user != current_user %>
-      <%= link_to "Rent this spot", event_parkingspot_rental_path(@event, parkingspot, find_rentals(@event, parkingspot)), method: :patch %>
-    <% end %>
-    <hr>
-  <% end %>
-<% else %>
-  <h2> No Parkingspots offered at the moment...</h2>
-<% end %>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+<div>
 
-<div id="map" style='width: 800px; height: 400px;'></div>
 
 <script>
-handler = Gmaps.build('Google');
-handler.buildMap({ provider: {
-
-}, internal: {id: 'map'}}, function(){
-  markers = handler.addMarkers([
-    {
-      "lat": <%= @event.latitude %>,
-      "lng": <%= @event.longitude %>,
-      "infowindow": "<%= @event.title %>"
-    },
-  ]);
-  handler.bounds.extendWith(markers);
-  handler.fitMapToBounds();
-});
+  handler = Gmaps.build('Google');
+  circle = {lng: <%= @event.longitude %>,
+            lat: <%= @event.latitude %>,
+            radius: 560,
+          }
+  circle_style = { strokeColor:"#0000FF", strokeOpacity: 1, strokeWeight: 3, fillColor: 'transparent' }
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    eventlocation = handler.addMarkers([
+      {
+        "lat": <%= @event.latitude %>,
+        "lng": <%= @event.longitude %>,
+        "infowindow": "<%= @event.title %>"
+      },
+    ]);
+    markers = handler.addMarkers(<%=raw @markers_hash.to_json %>);
+    handler.bounds.extendWith(eventlocation);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(15);
+    handler.addCircle(circle, circle_style)
+  });
 </script>

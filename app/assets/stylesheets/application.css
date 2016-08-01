@@ -14,15 +14,3 @@
  *= require_self
  *= require fullcalendar
  */
-  body {
-      font-family: 'Ubuntu';
-      background-image:url(/assets/bg.png);
-  }
-
-  @media only screen and (min-width : 1200px) {
-
-   #calendar {
-     width: 50%;
-   }
-
- }

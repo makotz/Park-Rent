@@ -15,11 +15,14 @@ Rails.application.routes.draw do
 
   resources :parkingspots, only: [:show, :index] do
     get "/schedule.json" => "parkingspots#calendar"
+    post "/rentals" => "rentals#nonEventRental"
   end
+
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection
   end
 
+  resources :charges
 
 
   # The priority is based upon order of creation: first created -> highest priority.

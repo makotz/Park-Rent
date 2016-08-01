@@ -9,7 +9,7 @@ class EventsController < ApplicationController
     @event = Event.new event_params
     @event.user = current_user
     if @event.save
-      flash[:notice] = 'Event: "#{@event.title}" has been added!'
+      flash[:notice] = "Event: #{@event.title} has been added!"
       redirect_to event_path(@event)
     else
       render :new
@@ -33,12 +33,12 @@ class EventsController < ApplicationController
   def show
     current_user
     @event = Event.find params[:id]
-    @offer_parking = current_user.parkingspots.within_radius(WALKING_DISTANCE, @event.latitude, @event.longitude).order_by_distance(@event.latitude, @event.longitude)
-    @parkingspots = @event.available_parkingspots
-    @markers_hash = Gmaps4rails.build_markers(@parkingspots) do |campaign, marker|
-                  marker.lat campaign.latitude
-                  marker.lng campaign.longitude
-                  marker.infowindow campaign.title
+    @myparkingspots = current_user.parkingspots.near([@event.latitude, @event.longitude], 1, units: :km)
+    @eventparking = @event.parkingspots_for_rent
+    @markers_hash = Gmaps4rails.build_markers(@eventparking) do |spot, marker|
+                  marker.lat spot.latitude
+                  marker.lng spot.longitude
+                  marker.infowindow spot.title
                 end
   end
 

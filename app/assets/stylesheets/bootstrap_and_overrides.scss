@@ -2,3 +2,24 @@
 @import "bootstrap";
 @import 'bootstrap/glyphicons';
 @import 'bootstrap-datetimepicker';
+
+body {
+    font-family: 'Ubuntu';
+    background-image:url(/assets/bg.png);
+}
+
+@media only screen and (min-width : 1200px) {
+
+ #calendar {
+   width: 50%;
+ }
+
+ .form {
+   background-color: #fff;
+   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.08),0 0px 5px 5px rgba(0, 0, 0, 0.02);
+   border-radius: 2px;
+   margin: 0 0 16px 0;
+   padding: 10px 20px 20px 20px;
+ }
+
+}

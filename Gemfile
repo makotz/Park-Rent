@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'stripe'
 gem 'activerecord-postgres-earthdistance'
 gem 'as-duration'
 gem 'faker'

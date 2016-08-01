@@ -22,14 +22,14 @@ class Event < ActiveRecord::Base
 
   after_validation :geocode
 
-
-  def available_parkingspots
-    rentals = self.rentals.where(user_id: nil)
-    @parkingspots = []
-    rentals.each do |rental|
-      @parkingspots << rental.parkingspot
-    end
-    @parkingspots
-  end
+  # 
+  # def available_parkingspots
+  #   rentals = self.rentals.where(user_id: nil)
+  #   @parkingspots = []
+  #   rentals.each do |rental|
+  #     @parkingspots << rental.parkingspot
+  #   end
+  #   @parkingspots
+  # end
 
 end
