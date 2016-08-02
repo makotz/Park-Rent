@@ -1,27 +1,38 @@
 <h1>My Scoop Profile</h1>
 
-<h2>My Parking Spots</h2>
-<% current_user.parkingspots.each do |parkingspot| %>
-  <%= link_to "#{parkingspot.title}", parkingspot_path(parkingspot) %> (<%= parkingspot.address %>)
-  <hr>
-<% end %>
+<ul class="nav nav-tabs">
+  <li class=""><a href="#spots" data-toggle="tab" aria-expanded="false">My Spots</a></li>
+  <li class=""><a href="#events" data-toggle="tab" aria-expanded="false">My Events</a></li>
+  <li class=""><a href="#reservations" data-toggle="tab" aria-expanded="false">My Reservations</a></li>
+</ul>
 
-<h2>Manage My Parkingspots</h2>
-<%= render "managementcalendar" %>
-
-
-<h2>My Reservations</h2>
-<% current_user.rentals.each do |rental| %>
-  <h3>Parking spot: <%= rental.parkingspot.title %></h3>
-  <% if rental.event != nil %>
-    <h3>Event: <%= rental.event.title %></h3>
-  <% end %>
-  Time:(<%= rental.start %> - <%= rental.end %>)
-  <hr>
-<% end %>
-
-<h2>My Events</h2>
-<% current_user.events.each do |event| %>
-  <p><%= link_to "#{event.title}", event_path(event)%></p>
-  <hr>
-<% end %>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade" id="spots">
+    Spots
+    <% current_user.parkingspots.each do |parkingspot| %>
+    <%= link_to "#{parkingspot.title}", parkingspot_path(parkingspot) %> (<%= parkingspot.address %>)
+    <% parkingspots.rentals.each do |rental| %>
+    $<%= rental.price %>
+    <% end %>
+    <hr>
+    <% end %>
+    <%= render "managementcalendar" %>
+  </div>
+  <div class="tab-pane fade" id="events">
+    Events
+    <% current_user.events.each do |event| %>
+      <p><%= link_to "#{event.title}", event_path(event)%></p>
+      <hr>
+    <% end %>
+  </div>
+  <div class="tab-pane fade" id="reservations">
+    <% current_user.rentals.each do |rental| %>
+      <h3>Parking spot: <%= rental.parkingspot.title %></h3>
+      <% if rental.event != nil %>
+        <h3>Event: <%= rental.event.title %></h3>
+      <% end %>
+      Time:(<%= rental.start %> - <%= rental.end %>)
+      <hr>
+    <% end %>
+  </div>
+</div>

@@ -1,6 +1,12 @@
-<h1>All Events</h1>
-<% @events.each do |event| %>
-  <%= link_to "#{event.title}", event_path(event) %>
-  <%= event.start %> - <%= event.end %>
-  <hr>
+<h1>All Event</h1>
+
+<% if @event %>
+  <% @events.each do |event| %>
+    <div>
+      <%= link_to "#{event.title}", event_path(event) %>
+      <%= event.start %> - <%= event.end %>
+    </div>
+  <% end %>
+<% else %>
+  <h2>No Events listed </h2>
 <% end %>

@@ -6,13 +6,27 @@
 body {
     font-family: 'Ubuntu';
     background-image:url(/assets/bg.png);
+    position: relative;
 }
 
 @media only screen and (min-width : 1200px) {
+  .navbar-brand,
+  .navbar-nav li a {
+      line-height: 80px;
+      height: 80px;
+      padding-top: 0;
+      font-size: 20px;
+  }
 
- #calendar {
+
+  .container-fluid {
+    padding-left: 50px;
+    padding-right: 50px
+  }
+
+  #calendar {
    width: 50%;
- }
+  }
 
  .form {
    background-color: #fff;

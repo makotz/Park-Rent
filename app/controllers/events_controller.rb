@@ -12,7 +12,7 @@ class EventsController < ApplicationController
       flash[:notice] = "Event: #{@event.title} has been added!"
       redirect_to event_path(@event)
     else
-      render :new
+      render :new, alert: "Something went wrong..."
     end
   end
 
@@ -55,23 +55,18 @@ class EventsController < ApplicationController
 
 
 
-  def find_rentals(e, p)
-    r = Rental.where(event_id: e, parkingspot_id: p)
-    r[0]
-  end
-
   def event_owner?
     current_user == @event.user
   end
 
-  helper_method :find_rentals, :event_owner?
+  helper_method :event_owner?
 
   private
 
   WALKING_DISTANCE = 560
 
   def event_params
-    params.require(:event).permit(:title, :description, :address, :start, :end, :city, :state, :country)
+    params.require(:event).permit(:title, :description, :address, :start, :end, :city, :state, :country, :suggested_price)
   end
 
 end

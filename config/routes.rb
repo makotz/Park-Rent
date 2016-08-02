@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
   resources :events, only: [:show, :index] do
     resources :parkingspots, only: [] do
-      resources :rentals, only: [:new, :create, :show, :update]
+      resources :rentals, only: [:new, :create, :update] do
+        get "/charges/new" => "rentals#newcharge"
+        post "/charges" => "rentals#createcharge"
+      end
     end
   end
 

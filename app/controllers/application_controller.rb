@@ -21,6 +21,11 @@ class ApplicationController < ActionController::Base
     redirect_to new_session_path, alert: "please sign in" unless user_signed_in?
   end
 
+  def find_rentals(e, p)
+    r = Rental.where(event_id: e, parkingspot_id: p).limit(1)
+    r[0]
+  end
 
-  helper_method :user_signed_in?, :current_user
+
+  helper_method :user_signed_in?, :current_user, :find_rentals
 end

@@ -18,5 +18,6 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require fullcalendar
+//= require pickers
 //= require gmaps/google
 //= require_tree .

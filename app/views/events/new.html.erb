@@ -1,13 +1,15 @@
-<h1>Add Event</h1>
-<%= simple_form_for(@event, url:user_events_path(current_user)) do |f| %>
-<%= f.input :title %>
-<%= f.input :description %>
-<%= f.input :country %>
-<%= f.input :state %>
-<%= f.input :city %>
-<%= f.input :address %>
-<%= f.input :start %>
-<%= f.input :end %>
-<%= f.input :suggested_price, placeholder: "Suggested per hour parking rental" %>
-<%= f.button :submit, class: "btn btn-primary" %>
+<div class="form">
+<legend>Add Event</legend>
+<%= simple_form_for(@event, url: user_events_path(current_user)) do |f| %>
+    <%= f.input :title %>
+    <%= f.input :description, placeholder: 'E.g. House with the red chimney!' %>
+    <%= f.input :country %>
+    <%= f.input :state, label: 'Province/State' %>
+    <%= f.input :city %>
+    <%= f.input :address %>
+    <%= f.input :start, :as => :datetime_picker %>
+    <%= f.input :end, :as => :datetime_picker %>
+    <%= f.input :suggested_price, label: 'Suggested price per hour ($)', collection: 0..10, selected: 2%>
+    <%= f.button :submit, class: "btn btn-primary" %>
 <% end %>
+</div>

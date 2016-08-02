@@ -24,11 +24,11 @@
   <% if @eventparking != [] %>
     <h2>Event Parkingspots (Parking price: <%= @event.suggested_price %>)</h2>
     <% @eventparking.each do |parkingspot| %>
-      <%= parkingspot.title %> (<%= parkingspot.full_street_address %>)
-      <% if parkingspot.user != current_user %>
-        <%= link_to "Rent this spot", event_parkingspot_rental_path(@event, parkingspot, find_rentals(@event, parkingspot)), method: :patch %>
-      <% end %>
-      <hr>
+        <%= parkingspot.title %> (<%= parkingspot.full_street_address %>) <%= find_rentals(@event, parkingspot).price %>
+        <% if parkingspot.user != current_user %>
+          <%= link_to "Rent this spot",event_parkingspot_rental_charges_new_path(@event, parkingspot, find_rentals(@event, parkingspot)) %>
+        <% end %>
+        <hr>
     <% end %>
   <% else %>
     <h2> No Parkingspots offered at the moment...</h2>
@@ -44,7 +44,7 @@
             lat: <%= @event.latitude %>,
             radius: 560,
           }
-  circle_style = { strokeColor:"#0000FF", strokeOpacity: 1, strokeWeight: 3, fillColor: 'transparent' }
+  circle_style = { strokeColor:"red", strokeOpacity: 1, strokeWeight: 3, fillColor: 'transparent' }
   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
     eventlocation = handler.addMarkers([
       {

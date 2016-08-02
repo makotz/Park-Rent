@@ -1,5 +1,39 @@
 class RentalsController < ApplicationController
 
+  def newcharge
+    rental = Rental.find params[:rental_id]
+    @amount = (rental.price).round(2)
+  end
+
+  def createcharge
+    # Amount in cents
+    rental = Rental.find params[:rental_id]
+    event = Event.find params[:event_id]
+    @amount = ((rental.price).round(2)*100).to_i
+
+    customer = Stripe::Customer.create(
+      :email => params[:stripeEmail],
+      :source  => params[:stripeToken]
+    )
+
+    charge = Stripe::Charge.create(
+      :customer    => customer.id,
+      :amount      => @amount,
+      :description => 'Rails Stripe customer',
+      :currency    => 'CAD'
+    )
+
+    rental.user = current_user
+    if rental.save
+      redirect_to event_path(params[:event_id]), notice: "Rental reservation has been made! Enjoy the event."
+    end
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to root_path
+
+  end
+
+
   def create
     rental = Rental.new
     rental.parkingspot = Parkingspot.find params[:parkingspot_id]
@@ -29,7 +63,7 @@ class RentalsController < ApplicationController
   end
 
   def update
-    rental = Rental.find params[:id]
+    rental = Rental.find params[:rental_id]
     rental.user = current_user
     if rental.save
       redirect_to event_path(params[:event_id]), notice: "Rental reservation has been made! Enjoy the event."

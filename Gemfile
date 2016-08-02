@@ -1,12 +1,13 @@
 source 'https://rubygems.org'
 
+gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
 gem 'stripe'
 gem 'activerecord-postgres-earthdistance'
 gem 'as-duration'
 gem 'faker'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'fullcalendar-rails'
-gem 'momentjs-rails'
+gem 'momentjs-rails', '~> 2.9',  :github => 'derekprior/momentjs-rails'
 gem 'fullcalendar-wrapper-rails'
 gem 'jquery-turbolinks'
 gem 'bootstrap-sass', '~> 3.3.6'
