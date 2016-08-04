@@ -1,5 +1,6 @@
 class ParkingspotsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
+  before_action :find_parkingspot, only: [:show, :edit, :update, :destroy]
 
 
   def new
@@ -10,23 +11,22 @@ class ParkingspotsController < ApplicationController
     @parkingspot = Parkingspot.new parkingspot_params
     @parkingspot.user = current_user
     if @parkingspot.save
-      flash[:notice] = "Parkingspot: #{@parkingspot.title} added!"
-      redirect_to parkingspot_path(@parkingspot)
+      redirect_to parkingspot_path(@parkingspot), notice: "Parkingspot: #{@parkingspot.title} added!"
     else
-      render 'new'
+      render :new
     end
   end
 
   def calendar
-    parkingspot = Parkingspot.find(params[:parkingspot_id])
+    parkingspot = Parkingspot.find params[:parkingspot_id]
     schedule = []
     parkingspot.rentals.each do |rental|
       rental_schedule = {
-        "title" => rental.event.title,
-        "start" => rental.start,
-        "end"   => rental.end,
-        "color" => "blue",
-        "url"   => event_path(rental.event)
+        "title" => "Hello",
+        "start" => rental.starttime,
+        "end"   => rental.endtime,
+        "color" => "blue"
+        # "url"   => event_path(rental.event)
       }
       schedule << rental_schedule
     end
@@ -34,16 +34,13 @@ class ParkingspotsController < ApplicationController
   end
 
   def show
-    @parkingspot = Parkingspot.find(params[:id])
     @rental = Rental.new
   end
 
   def edit
-    @parkingspot = Parkingspot.find params[:id]
   end
 
   def update
-    @parkingspot = Parkingspot.find params[:id]
     if @parkingspot.update parkingspot_params
       redirect_to parkingspot_path(@parkingspot), notice: "Event info updated."
     else
@@ -60,32 +57,35 @@ class ParkingspotsController < ApplicationController
         params[:starttime] = DateTime.strptime(params[:starttime], "%m/%d/%Y %I:%M %P")
         params[:endtime] = params[:endtime].to_datetime
       end
-      unavailable_spots =  Rental.where(:start => params[:starttime]..params[:endtime])
-      unavailable_spots += Rental.where(:end   => params[:starttime]..params[:endtime])
+      unavailable_spots =  Rental.where(:starttime => params[:starttime]..params[:endtime])
+      unavailable_spots += Rental.where(:endtime   => params[:starttime]..params[:endtime])
       nono = unavailable_spots.map { |spot| spot.parkingspot.id }.uniq
       @parkingspots = Parkingspot.where.not(id: nono)
+      @markers_hash = Gmaps4rails.build_markers(@parkingspots) do |spot, marker|
+                    marker.lat spot.latitude
+                    marker.lng spot.longitude
+                    marker.infowindow spot.title
+                  end
     else
       @parkingspots = Parkingspot.all
+      @markers_hash = Gmaps4rails.build_markers(@parkingspots) do |spot, marker|
+        marker.lat spot.latitude
+        marker.lng spot.longitude
+        marker.infowindow spot.title
+      end
     end
 
-    @markers_hash = Gmaps4rails.build_markers(@parkingspots) do |campaign, marker|
-                  marker.lat campaign.latitude
-                  marker.lng campaign.longitude
-                  marker.infowindow campaign.title
-                end
-
     respond_to do |format|
-      format.json {render json: @parkingspots}
+      format.json {render json: {parkingspots: @parkingspots, markers_hash: @markers_hash}}
       format.html
     end
 
   end
 
-  def parkingspot_owner?
-    current_user == @parkingspot.user
+  def destroy
+    @parkingspot.destroy
+    redirect_to root_path, notice: "Destroyed parkingspot"
   end
-
-  helper_method :parkingspot_owner?
 
   private
 
@@ -93,7 +93,8 @@ class ParkingspotsController < ApplicationController
     params.require(:parkingspot).permit(:title, :description, :address, :city, :state, :country, :default_price)
   end
 
-  # def available_parkingspots
-  #   params[:starttime] params[:endtime]
-  # end
+  def find_parkingspot
+    @parkingspot = Parkingspot.find params[:id]
+  end
+
 end

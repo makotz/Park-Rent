@@ -11,9 +11,9 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap-sprockets
+//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
+//= require bootstrap-sprockets
 //= require underscore
 //= require moment
 //= require bootstrap-datetimepicker
@@ -21,3 +21,10 @@
 //= require pickers
 //= require gmaps/google
 //= require_tree .
+
+$(document).ready(function(){
+
+  $("body > div > div.alert.alert-dismissible.alert-success").delay(2000).fadeOut('slow');
+  $("body > div > div.alert.alert-dismissible.alert-danger").delay(2000).fadeOut('slow');
+
+});

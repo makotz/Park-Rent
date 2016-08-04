@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'validates_timeliness', '~> 4.0'
+gem 'validates_overlap'
+gem 'jquery-turbolinks'
+gem 'active_model_serializers'
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
 gem 'stripe'
 gem 'activerecord-postgres-earthdistance'

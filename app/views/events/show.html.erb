@@ -1,31 +1,29 @@
 <div class="form">
   <h1><%= @event.title %></h1>
-  <% if user_signed_in? && event_owner? %>
+  <% if event_owner? %>
     <%= link_to "Edit Event", edit_user_event_path(current_user, @event) %>
     <%= link_to "Delete Event", user_event_path(current_user, @event), method: :delete %>
   <% end %>
 
-  <h3>Organizer: <%= @event.user.full_name %></h3>
-  <h4>Description: <%= @event.description %></h4>
+  <h4>Event host: <%= @event.user.full_name %></h4>
+  <h4>Details: <%= @event.description %></h4>
 
-  <% if !event_owner? %>
-  <% if current_user.parkingspots.empty? %>
+  <% if !event_owner? && current_user.parkingspots.empty? %>
   <% elsif @myparkingspots %>
-    <h2>Offer my nearby parkingspot(s)</h2>
+    <h3>Offer my nearby parkingspot(s)</h3>
     <% @myparkingspots.each do |parkingspot| %>
         <%= link_to "#{parkingspot.title}", event_parkingspot_rentals_path(@event, parkingspot.id), method: :post %>
       <hr>
     <% end %>
   <% else %>
-    <h2>No spots I own are in walking distance</h2>
-  <% end %>
+    <h3>No spots I own are in walking distance</h3>
   <% end %>
 
   <% if @eventparking != [] %>
-    <h2>Event Parkingspots (Parking price: <%= @event.suggested_price %>)</h2>
+    <h3>Event Parkingspots (Parking price: $<%= @event.suggested_price %>/hr)</h3>
     <% @eventparking.each do |parkingspot| %>
-        <%= parkingspot.title %> (<%= parkingspot.full_street_address %>) <%= find_rentals(@event, parkingspot).price %>
-        <% if parkingspot.user != current_user %>
+        <%= parkingspot.title %> (<%= parkingspot.full_street_address %>) $ <%= find_rentals(@event, parkingspot).price %>
+        <% if !parkingspot_owner?(parkingspot) #TO-DO add validations so that if its once rented it cannot be rented again%>
           <%= link_to "Rent this spot",event_parkingspot_rental_charges_new_path(@event, parkingspot, find_rentals(@event, parkingspot)) %>
         <% end %>
         <hr>
@@ -34,7 +32,7 @@
     <h2> No Parkingspots offered at the moment...</h2>
   <% end %>
 
-  <div id="map" style='width: 800px; height: 400px;'></div>
+  <div class="container-fluid" id="map" style='width: 800px; height: 400px;'></div>
 <div>
 
 
@@ -42,9 +40,9 @@
   handler = Gmaps.build('Google');
   circle = {lng: <%= @event.longitude %>,
             lat: <%= @event.latitude %>,
-            radius: 560,
+            radius: 400,
           }
-  circle_style = { strokeColor:"red", strokeOpacity: 1, strokeWeight: 3, fillColor: 'transparent' }
+  circle_style = { strokeColor: '#009688', strokeOpacity: 1, strokeWeight: 3, fillColor: '#80CBC4' }
   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
     eventlocation = handler.addMarkers([
       {

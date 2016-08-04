@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
+  before_action :find_event, only: [:edit, :show, :update, :destroy]
 
   def new
     @event = Event.new
@@ -9,7 +10,7 @@ class EventsController < ApplicationController
     @event = Event.new event_params
     @event.user = current_user
     if @event.save
-      flash[:notice] = "Event: #{@event.title} has been added!"
+      flash[:notice] = "Event: #{@event.title} has been created!"
       redirect_to event_path(@event)
     else
       render :new, alert: "Something went wrong..."
@@ -17,11 +18,9 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find params[:id]
   end
 
   def update
-    @event = Event.find params[:id]
     if @event.update event_params
       redirect_to event_path(@event), notice: "Event info updated."
     else
@@ -32,7 +31,6 @@ class EventsController < ApplicationController
 
   def show
     current_user
-    @event = Event.find params[:id]
     @myparkingspots = current_user.parkingspots.near([@event.latitude, @event.longitude], 1, units: :km)
     @eventparking = @event.parkingspots_for_rent
     @markers_hash = Gmaps4rails.build_markers(@eventparking) do |spot, marker|
@@ -47,9 +45,8 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event = Event.find params[:id]
-    redirect_to root_path, alert: "access defined" unless can? :destroy, @event
     @event.destroy
+    # redirect_to root_path, alert: "access defined"
     render root_path, notice: "Event deleted"
   end
 
@@ -66,7 +63,11 @@ class EventsController < ApplicationController
   WALKING_DISTANCE = 560
 
   def event_params
-    params.require(:event).permit(:title, :description, :address, :start, :end, :city, :state, :country, :suggested_price)
+    params.require(:event).permit(:title, :description, :address, :starttime, :endtime, :city, :state, :country, :suggested_price, :notify)
+  end
+
+  def find_event
+    @event = Event.find params[:id]
   end
 
 end

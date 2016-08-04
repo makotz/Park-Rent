@@ -11,7 +11,7 @@
     Spots
     <% current_user.parkingspots.each do |parkingspot| %>
     <%= link_to "#{parkingspot.title}", parkingspot_path(parkingspot) %> (<%= parkingspot.address %>)
-    <% parkingspots.rentals.each do |rental| %>
+    <% parkingspot.rentals.each do |rental| %>
     $<%= rental.price %>
     <% end %>
     <hr>
@@ -31,7 +31,7 @@
       <% if rental.event != nil %>
         <h3>Event: <%= rental.event.title %></h3>
       <% end %>
-      Time:(<%= rental.start %> - <%= rental.end %>)
+      Time:(<%= rental.starttime %> - <%= rental.endtime %>)
       <hr>
     <% end %>
   </div>

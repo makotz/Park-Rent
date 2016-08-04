@@ -5,31 +5,24 @@ class Event < ActiveRecord::Base
   has_many :rentals, dependent: :destroy
   has_many :parkingspots_for_rent, through: :rentals, source: :parkingspot
 
-  validates :title, presence: true, uniqueness: true
-  validates :start, presence: true
-  validates :end, presence: true
+  validates(:title, {presence: {message: "must be present!"}, uniqueness: true})
+  validates :starttime, presence: true
+  validates :endtime, presence: true
+  validates :address, presence: true
+  validate :date_validation
+
+  validates_datetime :endtime, :after => :starttime # Method symbol
 
   def full_street_address
   [address, city, state, country].compact.join(', ')
   end
 
-
-  # if city.exists?
+  if :city == ""
+    geocoded_by :address
+   else
     geocoded_by :full_street_address
-  # else
-    # geocoded_by :address
-  # end
+  end
 
   after_validation :geocode
-
-  # 
-  # def available_parkingspots
-  #   rentals = self.rentals.where(user_id: nil)
-  #   @parkingspots = []
-  #   rentals.each do |rental|
-  #     @parkingspots << rental.parkingspot
-  #   end
-  #   @parkingspots
-  # end
 
 end

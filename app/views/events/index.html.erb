@@ -1,12 +1,14 @@
-<h1>All Event</h1>
+<div class="form">
+  <h1>All Events</h1>
+</div>
 
-<% if @event %>
-  <% @events.each do |event| %>
-    <div>
-      <%= link_to "#{event.title}", event_path(event) %>
-      <%= event.start %> - <%= event.end %>
-    </div>
+  <% if !@events.empty? %>
+    <% @events.each do |event| %>
+      <div class="form">
+        <h2><%= link_to "#{event.title}", event_path(event) %> (<%= event.address %>)</h2>
+        <h5><%= event.starttime %> - <%= event.endtime %></h5>
+      </div>
+    <% end %>
+  <% else %>
+    <h2>No Events listed</h2>
   <% end %>
-<% else %>
-  <h2>No Events listed </h2>
-<% end %>

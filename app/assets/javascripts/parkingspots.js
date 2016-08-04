@@ -1,16 +1,13 @@
 // AJAX for the INDEX page
 var url = "parkingspots/"
 
-
 $(document).ready(function () {
 
   $('#starttime').datetimepicker();
-
   $('#endtime').datetimepicker({
     useCurrent: false
   });
 
-  // On change for starttime
   $("#starttime").on("dp.change", function (e) {
     $('#endtime').data("DateTimePicker").minDate(e.date);
     var starttime = e.date._d
@@ -24,11 +21,22 @@ $(document).ready(function () {
         origin: "starttime"
       },
       success: function(data) {
+        var parkingspots = data.parkingspots
+        var markers_hash = data.markers_hash
+
         $('#available_parkingspots').html("")
-        for (var i = 0; i < data.length; i++) {
+        for (var i = 0; i < parkingspots.length; i++) {
           $('#available_parkingspots').append(
-            "<a href=" + url + data[i].id + ">" + data[i].title + "</a> (" + data[i].address + ")<hr>"
+            "<a href=" + url + parkingspots[i].id + ">" + parkingspots[i].title + "</a> (" + parkingspots[i].address + ")<hr>"
           )};
+
+        $('#map').html("")
+        handler = Gmaps.build('Google');
+        handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+          markers = handler.addMarkers(markers_hash);
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+        });
       },
       error: function () {
         console.log("Error :(")
@@ -36,7 +44,6 @@ $(document).ready(function () {
     });
   });
 
-  //On change for endtime
   $("#endtime").on("dp.change", function (g) {
     $('#starttime').data("DateTimePicker").maxDate(g.date);
     var endtime = g.date._d
@@ -50,11 +57,22 @@ $(document).ready(function () {
         origin: "endtime"
       },
       success: function(data) {
+        var parkingspots = data.parkingspots
+        var markers_hash = data.markers_hash
+
         $('#available_parkingspots').html("")
-        for (var i = 0; i < data.length; i++) {
+        for (var i = 0; i < parkingspots.length; i++) {
           $('#available_parkingspots').append(
-            "<a href=" + url + data[i].id + ">" + data[i].title + "</a> (" + data[i].address + ")<hr>"
+            "<a href=" + url + parkingspots[i].id + ">" + parkingspots[i].title + "</a> (" + parkingspots[i].address + ")<hr>"
           )};
+
+        $('#map').html("")
+        handler = Gmaps.build('Google');
+        handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+          markers = handler.addMarkers(markers_hash);
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+        });
       },
       error: function () {
         console.log("Error :(")

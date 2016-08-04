@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801195322) do
+ActiveRecord::Schema.define(version: 20160804004931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,8 +30,6 @@ ActiveRecord::Schema.define(version: 20160801195322) do
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "start"
-    t.datetime "end"
     t.string   "address"
     t.float    "longitude"
     t.float    "latitude"
@@ -42,6 +40,9 @@ ActiveRecord::Schema.define(version: 20160801195322) do
     t.string   "state"
     t.string   "country"
     t.float    "suggested_price"
+    t.datetime "starttime"
+    t.datetime "endtime"
+    t.boolean  "notify",          :default=>false
   end
 
   create_table "parkingspots", force: :cascade do |t|
@@ -61,14 +62,14 @@ ActiveRecord::Schema.define(version: 20160801195322) do
   end
 
   create_table "rentals", force: :cascade do |t|
-    t.datetime "start"
-    t.datetime "end"
     t.float    "price"
     t.integer  "parkingspot_id", :index=>{:name=>"index_rentals_on_parkingspot_id"}, :foreign_key=>{:references=>"parkingspots", :name=>"fk_rails_953a1681f6", :on_update=>:no_action, :on_delete=>:no_action}
     t.datetime "created_at",     :null=>false
     t.datetime "updated_at",     :null=>false
     t.integer  "event_id",       :index=>{:name=>"index_rentals_on_event_id"}, :foreign_key=>{:references=>"events", :name=>"fk_rails_01a319cf6a", :on_update=>:no_action, :on_delete=>:no_action}
     t.integer  "user_id",        :index=>{:name=>"index_rentals_on_user_id"}, :foreign_key=>{:references=>"users", :name=>"fk_rentals_user_id", :on_update=>:no_action, :on_delete=>:no_action}
+    t.datetime "starttime"
+    t.datetime "endtime"
   end
 
 end

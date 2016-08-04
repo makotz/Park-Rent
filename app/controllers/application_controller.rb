@@ -26,6 +26,9 @@ class ApplicationController < ActionController::Base
     r[0]
   end
 
+  def parkingspot_owner?(parkingspot)
+    current_user == parkingspot.user
+  end
 
-  helper_method :user_signed_in?, :current_user, :find_rentals
+  helper_method :user_signed_in?, :current_user, :find_rentals, :parkingspot_owner?
 end

@@ -1,0 +1,13 @@
+<div class="form">
+<legend>Edit Parking Spot</legend>
+<%= simple_form_for(@parkingspot) do |f| %>
+    <%= f.input :title %>
+    <%= f.input :description, placeholder: 'E.g. House with the red chimney!' %>
+    <%= f.input :country %>
+    <%= f.input :state, label: 'Province/State' %>
+    <%= f.input :city %>
+    <%= f.input :address %>
+    <%= f.input :default_price, label: 'Default price per hour' %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>
+</div>

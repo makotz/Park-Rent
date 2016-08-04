@@ -3,7 +3,7 @@ class Parkingspot < ActiveRecord::Base
 
   has_many :rentals, dependent: :destroy
   has_many :events, through: :rentals
-
+  #
   validates :user_id, presence: true
   validates :title, presence: true, uniqueness: true
   validates :address, presence: true, uniqueness: true
@@ -14,11 +14,11 @@ class Parkingspot < ActiveRecord::Base
   end
 
 
-  # if city.exists?
+  if :city == ""
+    geocoded_by :address
+   else
     geocoded_by :full_street_address
-  # else
-    # geocoded_by :address
-  # end
+  end
 
   after_validation :geocode
   acts_as_geolocated

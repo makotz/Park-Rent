@@ -1,6 +1,0 @@
-<h1>Pick which spot</h1>
-<% @current_user.parkingspots.each do |parkingspot| %>
-  <%= parkingspot.title %>
-  <%= link_to "Select this spot", event_rentals_path(params[:event_id]), method: :post %>
-  <hr>
-<% end %>

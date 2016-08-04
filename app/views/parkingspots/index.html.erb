@@ -1,6 +1,6 @@
 <h1>Available Parking Spots</h1>
 
-<% if  @parkingspots != [] %>
+<% if !@parkingspots.empty? %>
   <div id='available_parkingspots' class="col-sm-5">
     <% @parkingspots.each do |parkingspot| %>
       <%= link_to "#{parkingspot.title}", parkingspot_path(parkingspot) %> (<%= parkingspot.address %>)
@@ -9,12 +9,12 @@
     <% end %>
   </div>
 
-  <div class="col-sm-3">
+  <div class="col-sm-5">
   <h2>Look for parkingspots by time</h2>
 
   <h3>Start and End time</h3>
   <div class="container">
-      <div class='col-sm-2'>
+      <div class='col-sm-3'>
           <div class="form-group">
               <div class='input-group date' id='starttime'>
                   <input type='text' class="form-control" />
@@ -24,7 +24,7 @@
               </div>
           </div>
       </div>
-      <div class='col-sm-2'>
+      <div class='col-sm-3'>
           <div class="form-group">
               <div class='input-group date' id='endtime'>
                   <input type='text' class="form-control" />
