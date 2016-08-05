@@ -9,9 +9,8 @@ class Event < ActiveRecord::Base
   validates :starttime, presence: true
   validates :endtime, presence: true
   validates :address, presence: true
-  validate :date_validation
 
-  validates_datetime :endtime, :after => :starttime # Method symbol
+  validates_datetime :endtime, :after => :starttime
 
   def full_street_address
   [address, city, state, country].compact.join(', ')
@@ -24,5 +23,12 @@ class Event < ActiveRecord::Base
   end
 
   after_validation :geocode
+
+
+  def self.search(search)
+  search_condition = "%" + search + "%"
+  where(['title ILIKE ? or description ILIKE ?', search_condition, search_condition])
+  end
+
 
 end

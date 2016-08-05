@@ -1,13 +1,9 @@
 class RentalsController < ApplicationController
 
-  def newcharge
-    rental = Rental.find params[:rental_id]
-    @amount = (rental.price).round(2)
-  end
-
   def createcharge
     rental = Rental.find params[:rental_id]
-    event = Event.find params[:event_id]
+    event  = Event.find params[:event_id]
+    rental.user = current_user
     @amount = ((rental.price).round(2)*100).to_i
 
     customer = Stripe::Customer.create(
@@ -18,13 +14,14 @@ class RentalsController < ApplicationController
     charge = Stripe::Charge.create(
       :customer    => customer.id,
       :amount      => @amount,
-      :description => 'Rails Stripe customer',
+      :description => "Invoice for #{rental.parkingspot.user.first_name} from #{rental.user.first_name} for Rental ID: #{rental.id}",
       :currency    => 'CAD'
     )
 
-    rental.user = current_user
     if rental.save
       redirect_to event_path(event), notice: "Rental reservation has been made! Enjoy the event."
+    else
+      redirect_to event_path(event), alert: "Something went wrong with the reservation..."
     end
 
     rescue Stripe::CardError => e
@@ -60,10 +57,18 @@ class RentalsController < ApplicationController
     @rental.parkingspot = parkingspot
     @rental.price = (@rental.endtime-@rental.starttime)/3600 * @rental.parkingspot.default_price
     if @rental.save
-      redirect_to parkingspot_path(parkingspot), notice: "Reservation has been made"
+      redirect_to parkingspot_rental_charges_new_path(parkingspot, @rental)
     else
       redirect_to parkingspot_path(parkingspot), alert: "Can't make reservation"
     end
+  end
+
+  def noneventnewcharge
+    rental = Rental.find params[:rental_id]
+    @amount = (rental.price).round(2)
+  end
+
+  def noneventcreatecharge
   end
 
   def update
@@ -77,7 +82,7 @@ class RentalsController < ApplicationController
   private
 
   def rental_params
-    params.require(:rental).permit(:starttime, :endtime)
+    params.require(:rental).permit(:starttime, :endtime, :plateNumber)
   end
 
 end

@@ -1,25 +1,22 @@
-<div style="display: inline-block">
-  <h1><%= @parkingspot.title %></h1>
-  <h3>Owned by <%= @parkingspot.user.full_name %></h3>
-  <% if user_signed_in? && parkingspot_owner?(@parkingspot) %>
-    <%= link_to "Edit Parkingspot", edit_user_parkingspot_path(current_user, @parkingspot) %>
-    <%= link_to "Delete Parkingspot", user_parkingspot_path(current_user, @parkingspot), method: :delete %>
-  <% end %>
-  <h3>Details: <%= @parkingspot.description %></h3>
+<div class="container">
+  <div class= "box" style="display: inline-block;">
+      <h1><%= @parkingspot.title %></h1>
+      <h3>Owned by <%= @parkingspot.user.full_name %></h3>
+      <% if user_signed_in? && parkingspot_owner?(@parkingspot) %>
+        <%= link_to "Edit Parkingspot", edit_user_parkingspot_path(current_user, @parkingspot) %>
+        <%= link_to "Delete Parkingspot", user_parkingspot_path(current_user, @parkingspot), method: :delete %>
+      <% end %>
+      <h3>Details: <%= @parkingspot.description %></h3>
   </div>
 
-  <div id="map" style='width: 600px; height: 300px; display:block'></div>
+    <div id="map" style='width: 600px; height: 300px; display:inline-block; vertical-align:top; float:right'></div>
 
-  <% if @parkingspot.user != current_user %>
-  <h3>Rent for a given time</h3>
-    <%= simple_form_for(@rental, url: parkingspot_rentals_path(@parkingspot)) do |f| %>
-    <%= f.input :starttime %>
-    <%= f.input :endtime %>
-    <%= f.button :submit, class: "btn btn-primary" %>
-    <% end %>
-  <% end %>
 
-  <%= render "calendar" %>
+  <div class="box">
+    <%= render "modalcalendar" %>
+  </div>
+</div>
+
 
 <script>
   handler = Gmaps.build('Google');

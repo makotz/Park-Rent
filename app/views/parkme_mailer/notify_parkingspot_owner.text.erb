@@ -1,0 +1,12 @@
+Hello <%= @owner.first_name %>,
+
+This is Makoto from Parkme.ca.
+Today, I wanted to let you know that <%= @event.user.first_name %> is having a <%= @event.title %> near your <%= @parkingspot.title %>.
+The <%= @event.title %> is from <%= @event.starttime %> until <%= @event.endtime %> and <%= @event.user.first_name %> is requesting
+$<%= @event.suggested_price %> per hour.
+
+If you would like to rent out your <%= @parkingspot.title %>, Click <%= link_to "here", new_session_url %> to sign in and add the spot on the <%= link_to "#{@event.title}", event_url(@event) %> event page.
+
+Thank you for using ParkMe,
+
+ParkMe Team

@@ -30,5 +30,9 @@ class ApplicationController < ActionController::Base
     current_user == parkingspot.user
   end
 
-  helper_method :user_signed_in?, :current_user, :find_rentals, :parkingspot_owner?
+  def event_owner?
+    current_user == @event.user
+  end
+
+  helper_method :user_signed_in?, :current_user, :find_rentals, :parkingspot_owner?, :event_owner?
 end

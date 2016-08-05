@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :parkingspots, except: [:index, :show]
   end
 
+  get "/events/search" => "events#search", as: :search
+
   resources :events, only: [:show, :index] do
     resources :parkingspots, only: [] do
       resources :rentals, only: [:new, :create, :update] do
@@ -17,9 +19,15 @@ Rails.application.routes.draw do
   end
 
   resources :parkingspots, only: [:show, :index] do
+      resources :rentals, only: [] do
+        get "/charges/new" => "rentals#noneventnewcharge"
+        post "/charges" => "rentals#noneventcreatecharge"
+      end
     get "/schedule.json" => "parkingspots#calendar"
+    get "/rentals" => "rentals#nonEventRental"
     post "/rentals" => "rentals#nonEventRental"
   end
+
 
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection

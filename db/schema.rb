@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804004931) do
+ActiveRecord::Schema.define(version: 20160805050947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20160804004931) do
     t.string   "country"
     t.text     "description"
     t.float    "default_price"
-    t.boolean  "notification"
+    t.boolean  "notification",  :default=>false
   end
 
   create_table "rentals", force: :cascade do |t|
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20160804004931) do
     t.integer  "user_id",        :index=>{:name=>"index_rentals_on_user_id"}, :foreign_key=>{:references=>"users", :name=>"fk_rentals_user_id", :on_update=>:no_action, :on_delete=>:no_action}
     t.datetime "starttime"
     t.datetime "endtime"
+    t.string   "plateNumber"
   end
 
 end

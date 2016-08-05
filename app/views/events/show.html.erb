@@ -1,39 +1,50 @@
-<div class="form">
-  <h1><%= @event.title %></h1>
-  <% if event_owner? %>
-    <%= link_to "Edit Event", edit_user_event_path(current_user, @event) %>
-    <%= link_to "Delete Event", user_event_path(current_user, @event), method: :delete %>
-  <% end %>
+<div class="container">
+  <div class="form">
+    <h1><%= @event.title %></h1>
 
-  <h4>Event host: <%= @event.user.full_name %></h4>
-  <h4>Details: <%= @event.description %></h4>
-
-  <% if !event_owner? && current_user.parkingspots.empty? %>
-  <% elsif @myparkingspots %>
-    <h3>Offer my nearby parkingspot(s)</h3>
-    <% @myparkingspots.each do |parkingspot| %>
-        <%= link_to "#{parkingspot.title}", event_parkingspot_rentals_path(@event, parkingspot.id), method: :post %>
-      <hr>
+    <% if event_owner? %>
+      <%= link_to "Edit Event", edit_user_event_path(current_user, @event) %>
+      <%= link_to "Delete Event", user_event_path(current_user, @event), method: :delete %>
     <% end %>
-  <% else %>
-    <h3>No spots I own are in walking distance</h3>
-  <% end %>
 
-  <% if @eventparking != [] %>
-    <h3>Event Parkingspots (Parking price: $<%= @event.suggested_price %>/hr)</h3>
-    <% @eventparking.each do |parkingspot| %>
-        <%= parkingspot.title %> (<%= parkingspot.full_street_address %>) $ <%= find_rentals(@event, parkingspot).price %>
-        <% if !parkingspot_owner?(parkingspot) #TO-DO add validations so that if its once rented it cannot be rented again%>
-          <%= link_to "Rent this spot",event_parkingspot_rental_charges_new_path(@event, parkingspot, find_rentals(@event, parkingspot)) %>
-        <% end %>
+    <h4><%= @event.starttime %> ~ <%= @event.endtime %></h4>
+    <h4>Event host: <%= @event.user.full_name %></h4>
+    <h4>Details: <%= @event.description %></h4>
+
+    <% if !event_owner? && current_user.parkingspots.empty? %>
+    <% elsif @myparkingspots %>
+      <h3>Offer my nearby parkingspot(s)</h3>
+      <% @myparkingspots.each do |parkingspot| %>
+          <%= link_to "#{parkingspot.title}", event_parkingspot_rentals_path(@event, parkingspot.id)%>
         <hr>
+      <% end %>
+    <% else %>
+      <h3>No spots I own are in walking distance</h3>
     <% end %>
-  <% else %>
-    <h2> No Parkingspots offered at the moment...</h2>
-  <% end %>
 
-  <div class="container-fluid" id="map" style='width: 800px; height: 400px;'></div>
+    <% if @eventparking != [] %>
+      <h3>Event Parkingspots (Parking price: $<%= @event.suggested_price %>/hr)</h3>
+      <% @eventparking.each do |parkingspot| %>
+          <%= parkingspot.title %> (<%= parkingspot.address %>)
+          <% if !parkingspot_owner?(parkingspot) #TO-DO add validations so that if its once rented it cannot be rented again%>
+            <%= form_tag event_parkingspot_rental_charges_path(@event, parkingspot, find_rentals(@event, parkingspot)) do %>
+              Amount: $<%= find_rentals(@event, parkingspot).price %>
+              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                      data-description=""
+                      data-amount="<%= find_rentals(@event, parkingspot).price*100 %>"
+                      data-locale="auto"></script>
+            <% end %>
+          <% end %>
+      <% end %>
+    <% else %>
+      <h2> No Parkingspots offered at the moment...</h2>
+    <% end %>
+
+    <div class="container-fluid" id="map" style='width: 800px; height: 400px;'></div>
+  <div>
 <div>
+
 
 
 <script>
