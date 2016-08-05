@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
 
   def main
+    @user = User.new
     if params[:origin]
       if params[:origin] == "starttime"
         params[:endtime] = DateTime.strptime(params[:endtime], "%m/%d/%Y %I:%M %P")

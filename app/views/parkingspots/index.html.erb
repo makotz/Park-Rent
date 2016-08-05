@@ -13,11 +13,19 @@
     </div>
 
     <div class="col-sm-5">
-    <h2>Look for parkingspots by time</h2>
-
-    <h3>Start and End time</h3>
-    <div class="container">
-        <div class='col-sm-3'>
+    <div class="row">
+    <h3>Filter by location</h3>
+      <div class="col-lg-6">
+        <div class="input-group">
+          <input id="parkingspotsearch" type="text" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button id="parkingspotsearchbutton" class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <h3>Filter by time</h3>
+        <div class='col-sm-5'>
             <div class="form-group">
                 <div class='input-group date' id='starttime'>
                     <input type='text' class="form-control" />
@@ -27,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class='col-sm-3'>
+        <div class='col-sm-5'>
             <div class="form-group">
                 <div class='input-group date' id='endtime'>
                     <input type='text' class="form-control" />
@@ -37,7 +45,6 @@
                 </div>
             </div>
         </div>
-    </div>
     <div id="map" style='width: 600px; height: 400px;'></div>
     </div>
   <% else %>

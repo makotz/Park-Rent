@@ -50,17 +50,24 @@ class ParkingspotsController < ApplicationController
 
   def index
     if params[:origin]
-      if params[:origin] == "starttime"
-        params[:endtime] = DateTime.strptime(params[:endtime], "%m/%d/%Y %I:%M %P")
-        params[:starttime] = params[:starttime].to_datetime
-      elsif params[:origin] == "endtime"
-        params[:starttime] = DateTime.strptime(params[:starttime], "%m/%d/%Y %I:%M %P")
-        params[:endtime] = params[:endtime].to_datetime
-      end
+        if params[:origin] == "starttime"
+          params[:endtime] = DateTime.strptime(params[:endtime], "%m/%d/%Y %I:%M %P")
+          params[:starttime] = params[:starttime].to_datetime
+        elsif params[:origin] == "endtime"
+          params[:starttime] = DateTime.strptime(params[:starttime], "%m/%d/%Y %I:%M %P")
+          params[:endtime] = params[:endtime].to_datetime
+        elsif params[:origin] == "search"
+          params[:endtime] = DateTime.strptime(params[:endtime], "%m/%d/%Y %I:%M %P")
+          params[:starttime] = DateTime.strptime(params[:starttime], "%m/%d/%Y %I:%M %P")
+          address_search_bar(params[:location])
+        end
       unavailable_spots =  Rental.where(:starttime => params[:starttime]..params[:endtime])
       unavailable_spots += Rental.where(:endtime   => params[:starttime]..params[:endtime])
       nono = unavailable_spots.map { |spot| spot.parkingspot.id }.uniq
       @parkingspots = Parkingspot.where.not(id: nono)
+      if params[:origin] == "search"
+        @parkingspots = @parkingspots.near(@çsearch_location, 2, units: :km)
+      end
       @markers_hash = Gmaps4rails.build_markers(@parkingspots) do |spot, marker|
                     marker.lat spot.latitude
                     marker.lng spot.longitude
@@ -95,6 +102,14 @@ class ParkingspotsController < ApplicationController
 
   def find_parkingspot
     @parkingspot = Parkingspot.find params[:id]
+  end
+
+  def address_search_bar(params)
+    array = Geocoder.search(params)
+    lat = array[0].data["geometry"]["location"]["lat"]
+    lng = array[0].data["geometry"]["location"]["lng"]
+    @search_location = [lat, lng]
+    return @search_location
   end
 
 end

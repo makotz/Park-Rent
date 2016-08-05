@@ -39,7 +39,7 @@
 }
 
 /* The Close Button */
-.close {
+#signinclose {
     color: white;
     float: right;
     font-size: 28px;
@@ -47,7 +47,9 @@
 }
 
 .close:hover,
-.close:focus {
+.close:focus,
+#signinclose:hover,
+#signinclose:focus, {
     color: #000;
     text-decoration: none;
     cursor: pointer;

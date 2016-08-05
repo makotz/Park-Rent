@@ -23,4 +23,12 @@ class Parkingspot < ActiveRecord::Base
 
   after_validation :geocode
   acts_as_geolocated
+
+  private
+
+  def self.search(search)
+  search_condition = "%" + search + "%"
+  where(['title ILIKE ? or description ILIKE ?', search_condition, search_condition])
+  end
+
 end
