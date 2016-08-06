@@ -1,13 +1,5 @@
 <h1>My Scoop Profile</h1>
 
-<ul class="nav nav-tabs">
-  <li class=""><a href="#spots" data-toggle="tab" aria-expanded="false">My Spots</a></li>
-  <li class=""><a href="#events" data-toggle="tab" aria-expanded="false">My Events</a></li>
-  <li class=""><a href="#reservations" data-toggle="tab" aria-expanded="false">My Reservations</a></li>
-</ul>
-
-<div id="myTabContent" class="tab-content">
-  <div class="tab-pane fade" id="spots">
     Spots
     <% current_user.parkingspots.each do |parkingspot| %>
     <%= link_to "#{parkingspot.title}", parkingspot_path(parkingspot) %> (<%= parkingspot.address %>)
@@ -17,15 +9,13 @@
     <hr>
     <% end %>
     <%= render "managementcalendar" %>
-  </div>
-  <div class="tab-pane fade" id="events">
+
     Events
     <% current_user.events.each do |event| %>
       <p><%= link_to "#{event.title}", event_path(event)%></p>
       <hr>
     <% end %>
-  </div>
-  <div class="tab-pane fade" id="reservations">
+
     <% current_user.rentals.each do |rental| %>
       <h3>Parking spot: <%= rental.parkingspot.title %></h3>
       <% if rental.event != nil %>
@@ -34,5 +24,3 @@
       Time:(<%= rental.starttime %> - <%= rental.endtime %>)
       <hr>
     <% end %>
-  </div>
-</div>

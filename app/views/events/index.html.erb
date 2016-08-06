@@ -1,25 +1,3 @@
-<div class="form">
-  <h1>All Events</h1>
-
-
-<div id="eventlisting">
-  <% if !@events.empty? %>
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="input-group">
-        <input id="eventsearch" type="text" class="form-control" placeholder="Search for...">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Go!</button>
-        </span>
-      </div><!-- /input-group -->
-    </div><!-- /.col-lg-6 -->
-  </div><!-- /.row -->
-    <% @events.each do |event| %>
-        <h2><%= link_to "#{event.title}", event_path(event) %> (<%= event.address %>)</h2>
-        <h5><%= event.starttime %> - <%= event.endtime %></h5>
-    <% end %>
-  <% else %>
-    <h2>No Events listed</h2>
-  <% end %>
-</div>
+<div class='container'>
+<%= render :file => "/events/indexcontent" %>
 </div>

@@ -1,6 +1,6 @@
-<div class="form">
+<div class="fbform">
 <legend>Edit Parking Spot</legend>
-<%= simple_form_for(@parkingspot) do |f| %>
+<%= simple_form_for(@parkingspot, url: user_parkingspot_path(current_user, @parkingspot), method: :patch) do |f| %>
     <%= f.input :title %>
     <%= f.input :description, placeholder: 'E.g. House with the red chimney!' %>
     <%= f.input :country %>

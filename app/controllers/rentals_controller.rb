@@ -44,10 +44,11 @@ class RentalsController < ApplicationController
       rental.price = ((rental.endtime-rental.starttime)/3600 * rental.parkingspot.default_price).round(2)
     end
     if rental.save
-      redirect_to event_path(rental.event), notice: "Your parking spot is now available for rent for this event."
+      redirect_to event_path(event), notice: "Your parking spot is now available for rent for this event."
     else
-      redirect_to event_path(rental.event), alert: "Parking for it already exists!"
+      redirect_to event_path(event), alert: "Parking for it already exists!"
     end
+
   end
 
   def nonEventRental

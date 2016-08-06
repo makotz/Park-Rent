@@ -67,7 +67,7 @@ class EventsController < ApplicationController
   WALKING_DISTANCE = 400
 
   def event_params
-    params.require(:event).permit(:title, :description, :address, :starttime, :endtime, :city, :state, :country, :suggested_price, :notify)
+    params.require(:event).permit(:title, :description, :address, :starttime, :endtime, :city, :state, :country, :suggested_price, :notify, :user_name)
   end
 
   def find_event
@@ -75,7 +75,7 @@ class EventsController < ApplicationController
   end
 
   def send_notification_email(event)
-    notifyparkingspots = Parkingspot.near([event.latitude, event.longitude], 400, units: :km).where(notification: true)
+    notifyparkingspots = Parkingspot.near([event.latitude, event.longitude], 1, units: :km).where(notification: true)
     if event.notify
       notifyparkingspots.each do |parkingspot|
       ParkmeMailer.notify_parkingspot_owner(event, parkingspot).deliver_now

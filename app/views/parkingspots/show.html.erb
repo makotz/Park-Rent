@@ -9,14 +9,15 @@
       <h3>Details: <%= @parkingspot.description %></h3>
   </div>
 
-    <div id="map" style='width: 600px; height: 300px; display:inline-block; vertical-align:top; float:right'></div>
-
+  <div class="box">
+  <div id="map" style='width: 600px; height: 300px; display:inline-block; vertical-align:top; float:right'></div>
+  </div>
 
   <div class="box">
     <%= render "modalcalendar" %>
   </div>
+  
 </div>
-
 
 <script>
   handler = Gmaps.build('Google');

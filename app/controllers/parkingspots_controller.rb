@@ -34,6 +34,7 @@ class ParkingspotsController < ApplicationController
   end
 
   def show
+    @event = Event.new
     @rental = Rental.new
   end
 
@@ -66,7 +67,7 @@ class ParkingspotsController < ApplicationController
       nono = unavailable_spots.map { |spot| spot.parkingspot.id }.uniq
       @parkingspots = Parkingspot.where.not(id: nono)
       if params[:origin] == "search"
-        @parkingspots = @parkingspots.near(@çsearch_location, 2, units: :km)
+        @parkingspots = @parkingspots.near(@search_location, 2, units: :km)
       end
       @markers_hash = Gmaps4rails.build_markers(@parkingspots) do |spot, marker|
                     marker.lat spot.latitude
@@ -102,14 +103,6 @@ class ParkingspotsController < ApplicationController
 
   def find_parkingspot
     @parkingspot = Parkingspot.find params[:id]
-  end
-
-  def address_search_bar(params)
-    array = Geocoder.search(params)
-    lat = array[0].data["geometry"]["location"]["lat"]
-    lng = array[0].data["geometry"]["location"]["lng"]
-    @search_location = [lat, lng]
-    return @search_location
   end
 
 end

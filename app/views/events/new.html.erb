@@ -4,13 +4,13 @@
   <%= simple_form_for(@event, url: user_events_path(current_user)) do |f| %>
       <%= f.input :title, placeholder: 'E.g. House Party' %>
       <%= f.input :description, placeholder: 'E.g. Come out for a good time!' %>
+      <%= f.input :address %>
       <%= f.input :country %>
       <%= f.input :state, label: 'Province/State' %>
       <%= f.input :city %>
-      <%= f.input :address %>
       <%= f.input :starttime, label: 'Start at', :as => :datetime_picker %>
       <%= f.input :endtime, label: 'Ends at',:as => :datetime_picker %>
-      <%= f.input :suggested_price, label: 'Suggested hourly parking price ($)', collection: 0..10, selected: 2%>
+      <%= f.input :suggested_price, label: 'Suggested hourly parking price ($)'%>
       <%= f.input :notify, label: 'Notify nearby parkingspot holders?'%>
       <%= f.button :submit, class: "btn btn-primary" %>
   <% end %>

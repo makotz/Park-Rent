@@ -3,22 +3,159 @@
 @import 'bootstrap/glyphicons';
 @import 'bootstrap-datetimepicker';
 
+// xs (phones), sm (tablets), md (desktops), and lg (larger desktops).
 body {
     font-family: 'Ubuntu';
     background-image:url(/assets/bg.png);
     position: relative;
 }
 
+a.btn-cta-primary:hover, .btn-cta-primary:hover {
+    background: #bc515e;
+    border: 2px solid #bc515e;
+    color: #fff;
+}
+.promo .btn-cta {
+    font-size: 18px;
+}
+.btn.focus, .btn:focus, .btn:hover {
+    color: #333;
+    text-decoration: none;
+}
+a.btn-cta-primary, .btn-cta-primary {
+    background: #FF6A5C;
+    border: 2px solid #e4696d;
+    color: #fff;
+}
+a.btn-cta, .btn-cta {
+    padding: 8px 30px;
+}
+.btn, a.btn {
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    font-weight: bold;
+    border-radius: 0;
+}
+a:hover {
+    text-decoration: underline;
+    color: #bc515e;
+}
+a:focus, a:hover {
+    color: #23527c;
+    text-decoration: underline;
+}
+a:active, a:hover {
+    outline: 0;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+#top_nav {
+  background-color: #414141;
+}
+.text-center {
+    text-align: center;
+}
+
 .box {
   border-style: solid;
   border-color: red;
 }
+.small-box {
+  border-style: solid;
+  border-color: blue;
+}
 
-  #section1 {padding-top:50px;height:500px;color: #fff; background-color: #1E88E5;}
-  #section2 {padding-top:50px;height:500px;color: #fff; background-color: #673ab7;}
-  #section3 {padding-top:50px;height:500px;color: #fff; background-color: #ff9800;}
+.scrollable-menu {
+    height: auto;
+    overflow-x: hidden;
+    max-height: 615px;
+}
+
+#section0 {
+  background-image: url(/assets/jumbo1.jpg);
+  height: 700px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.hero-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top:0;
+  left: 0;
+  bottom:0;
+  right:0;
+  background-color: rgba(0,0,0, 0.2);
+}
+
+#section1 {padding-top:50px;height:800px;}
+#section2 {padding-top:50px;height:700px; background-color: violet}
+#section3 {padding-top:50px;height:700px;}
 
 @media only screen and (min-width : 1200px) {
+
+  #searchbar {
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+    padding-left: 30%;
+    padding-right: 30%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #startsearch {
+    width: 30%;
+    float: left;
+  }
+
+  #endsearch {
+    width: 30%;
+    float: left;
+  }
+
+  #searchbox {
+    width: 40%;
+    float: left;
+  }
+
+  #collab {display: inline-block;
+    vertical-align: middle;
+  }
+
+  #available_parkingspots {
+    height: 615px;
+  }
+
+  .welcome-title {
+    padding-top: 170px;
+    font-size: 100px;
+  }
 
   .navbar-brand,
   .navbar-nav li a {
@@ -42,13 +179,6 @@ body {
     width: 100%;
   }
 
-  img {
-    position: fixed;
-    width: 100%;
-    top: -400px;
-    z-index: -1;
-  }
-
   .container-fluid {
     padding-left: 200px;
     padding-right: 200px
@@ -58,8 +188,10 @@ body {
    width: 50%;
   }
 
- .form {
-   background-color: #fff;
+ .fbform {
+   background: #CCDFCB;
+   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15),-1px 0 0 rgba(0,0,0,0.03),1px 0 0 rgba(0,0,0,0.03),0 1px 0 rgba(0,0,0,0.12);
+   -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15),-1px 0 0 rgba(0,0,0,0.03),1px 0 0 rgba(0,0,0,0.03),0 1px 0 rgba(0,0,0,0.12);
    box-shadow: 0 1px 1px rgba(0,0,0,0.15),-1px 0 0 rgba(0,0,0,0.03),1px 0 0 rgba(0,0,0,0.03),0 1px 0 rgba(0,0,0,0.12);
    border-radius: 2px;
    margin: 0 0 16px 0;

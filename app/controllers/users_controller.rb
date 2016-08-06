@@ -19,6 +19,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @parkingspot = Parkingspot.new
+    @event = Event.new
   end
 
   def update

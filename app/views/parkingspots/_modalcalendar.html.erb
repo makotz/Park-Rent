@@ -19,42 +19,43 @@
 <h2>Parkingspot Schedule</h2>
 <% if @parkingspot.user != current_user %>
   <button id="reservationbutton" class="btn btn-primary">Make reservation</button>
+  <script>
+  $(document).ready(function() {
+    var reservationbutton = document.getElementById('reservationbutton');
+    var modal = document.getElementById('myModal');
+    var span = document.getElementsByClassName("close")[0];
+    reservationbutton.onclick = function() {
+      modal.style.display = "block";
+    }
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+    }
+  });
+  </script>
 <% end %>
 
 <div id="parkingspotcalendar"></div>
 
 <script>
 $(document).ready(function() {
-var reservationbutton = document.getElementById('reservationbutton');
-var modal = document.getElementById('myModal');
-var span = document.getElementsByClassName("close")[0];
-reservationbutton.onclick = function() {
-    modal.style.display = "block";
-}
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+  $('#parkingspotcalendar').html("")
+  $('#parkingspotcalendar').fullCalendar({
+    header: {
+      left: 'prev,today,next',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    },
+    defaultView :'agendaWeek',
+    height: 600,
+    events: "/parkingspots/" + <%= @parkingspot.id %> +'/schedule.json',
+    dayClick: function(date, jsEvent, view) {
+      modal.style.display = "block";
     }
-}
-
-    $('#parkingspotcalendar').html("")
-    $('#parkingspotcalendar').fullCalendar({
-        header: {
-            left: 'prev,today,next',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-        },
-        defaultView :'agendaWeek',
-        height: 600,
-        events: "/parkingspots/" + <%= @parkingspot.id %> +'/schedule.json',
-        dayClick: function(date, jsEvent, view) {
-          modal.style.display = "block";
-        }
-    });
+  });
 });
-
 </script>

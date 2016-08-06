@@ -34,5 +34,13 @@ class ApplicationController < ActionController::Base
     current_user == @event.user
   end
 
+  def address_search_bar(params)
+    array = Geocoder.search(params)
+    lat = array[0].data["geometry"]["location"]["lat"]
+    lng = array[0].data["geometry"]["location"]["lng"]
+    @search_location = [lat, lng]
+    return @search_location
+  end
+
   helper_method :user_signed_in?, :current_user, :find_rentals, :parkingspot_owner?, :event_owner?
 end
