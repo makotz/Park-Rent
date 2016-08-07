@@ -1,13 +1,13 @@
-<div id="calendar"></div>
+<div id="managementcalendar"></div>
 <script>
 $(document).ready(function() {
-    $('#calendar').fullCalendar({
+    $('#managementcalendar').fullCalendar({
         header: {
             left: 'today',
             center: 'prev title next',
             right: 'month,agendaWeek'
         },
-        defaultView :'month',
+        defaultView :'agendaWeek',
         height: 600,
         events: "/users/" + <%= current_user.id %> +'/schedule.json'
     });

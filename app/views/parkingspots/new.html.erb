@@ -1,16 +1,18 @@
 <div class="container">
-  <div class="form">
+  <div class="formsizespotnew">
+  <div class="fbform">
   <legend>Register Parking Spot</legend>
   <%= simple_form_for(@parkingspot, url: user_parkingspots_path(current_user)) do |f| %>
-      <%= f.input :title, placeholder: "E.g. Ethan's empty garage space" %>
+      <%= f.input :title, label: 'Name', placeholder: "E.g. Ethan's empty garage space" %>
       <%= f.input :description, placeholder: 'E.g. House with the red chimney!' %>
       <%= f.input :address, placeholder: 'E.g. 2276 W.18th Avenue' %>
-      <%= f.input :country %>
-      <%= f.input :state, label: 'Province/State', placeholder: 'E.g. B.C.' %>
       <%= f.input :city, placeholder: 'E.g. Vancouver' %>
+      <%= f.input :state, label: 'Province/State', placeholder: 'E.g. B.C.' %>
+      <%= f.input :country %>
       <%= f.input :default_price, label: 'Default price per hour ($)'%>
-      <%= f.input :notification, label: 'Default price per hour ($)'%>
+      <%= f.input :notification, label: 'Notify me for events near this spot!'%>
       <%= f.button :submit, class: "btn btn-primary" %>
   <% end %>
+  </div>
   </div>
 </div>

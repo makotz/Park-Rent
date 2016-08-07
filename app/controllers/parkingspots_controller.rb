@@ -22,11 +22,11 @@ class ParkingspotsController < ApplicationController
     schedule = []
     parkingspot.rentals.each do |rental|
       rental_schedule = {
-        "title" => "Hello",
+        "title" => rental.user.first_name,
         "start" => rental.starttime,
         "end"   => rental.endtime,
-        "color" => "blue"
-        # "url"   => event_path(rental.event)
+        "color" => "#056571",
+        "url"   => event_path(rental.event)
       }
       schedule << rental_schedule
     end
@@ -69,18 +69,10 @@ class ParkingspotsController < ApplicationController
       if params[:origin] == "search"
         @parkingspots = @parkingspots.near(@search_location, 2, units: :km)
       end
-      @markers_hash = Gmaps4rails.build_markers(@parkingspots) do |spot, marker|
-                    marker.lat spot.latitude
-                    marker.lng spot.longitude
-                    marker.infowindow spot.title
-                  end
+      make_markers(@parkingspots)
     else
       @parkingspots = Parkingspot.all
-      @markers_hash = Gmaps4rails.build_markers(@parkingspots) do |spot, marker|
-        marker.lat spot.latitude
-        marker.lng spot.longitude
-        marker.infowindow spot.title
-      end
+      make_markers(@parkingspots)
     end
 
     respond_to do |format|
@@ -98,7 +90,7 @@ class ParkingspotsController < ApplicationController
   private
 
   def parkingspot_params
-    params.require(:parkingspot).permit(:title, :description, :address, :city, :state, :country, :default_price)
+    params.require(:parkingspot).permit(:title, :description, :address, :city, :state, :country, :default_price, :notification)
   end
 
   def find_parkingspot

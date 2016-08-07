@@ -80,6 +80,7 @@ events = ["19 Torresdale Ave #58, Victoria, BC, V8X 1R2",
 "9 Route 38, Port Coquitlam, BC, V3C 2Z4"]
 
 
+
 puts "delete_all data"
 
 Parkingspot.delete_all

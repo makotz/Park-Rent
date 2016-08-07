@@ -1,27 +1,32 @@
-<% @markers_hash = Gmaps4rails.build_markers(@parkingspots) do |spot, marker|
-  marker.lat spot.latitude
-  marker.lng spot.longitude
-  marker.infowindow "<a href='/parkingspots/#{spot.id}'>#{spot.title}</a>"
-end %>
-
-<div id="section0">
-  <!-- <div class="hero-overlay"></div> -->
-    <div class="text-center welcome-title">
-      <p>Park Me</p>
-      <p>Crowd sourced parking solution</p>
-      <a class="btn btn-cta btn-cta-primary" href="#section1">Find Parking</a>
-      <a class="btn btn-cta btn-cta-primary" href="#section2">Find Event</a>
-      <a class="btn btn-cta btn-cta-primary" href="#section3">About</a>
+<div id="homepage">
+  <div id="section-1">Hello</div>
+  <div id="section0">
+    <!-- <div class="hero-overlay"></div> -->
+      <div class="text-center welcome-title">
+        <p id="title1">Park Me</p>
+        <p id="title2">Crowd sourced parking solution</p>
+        <div id="jumbobuttons">
+          <a class="btn btn-cta btn-cta-primary" href="#section1">Find Parking</a>
+          <a class="btn btn-cta btn-cta-primary" href="#section2">Find Event</a>
+        </div>
     </div>
   </div>
-<div id="section1" class="container-fluid">
-  <%= render :file => "/parkingspots/indexcontent" %>
-</div>
-<div id="section2" class="container-fluid">
-  <%= render :file => "/events/indexcontent" %>
-</div>
-<div id="section3" class="container-fluid">
-  <h1>Section 3</h1>
-  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+  <div id="section1" class="container-fluid">
+    <div class="fbform">
+      <%= render :file => "/parkingspots/indexcontent" %>
+    </div>
+  </div>
+  <div id="section1-5" class="container-fluid"></div>
+  <div id="section2" class="container-fluid">
+    <%= render :file => "/events/indexcontent" %>
+  </div>
+  <div id="section2-5" class="container-fluid"></div>
+  <div id="section3" class="container-fluid">
+    <h1>Section 3</h1>
+    <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+    <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+  </div>
+  <div id="section4" class="container-fluid">
+    <h1>Section 3</h1>
+  </div>
 </div>

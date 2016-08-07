@@ -1,26 +1,40 @@
-<h1>My Scoop Profile</h1>
+<% bank = 0 %>
 
-    Spots
-    <% current_user.parkingspots.each do |parkingspot| %>
-    <%= link_to "#{parkingspot.title}", parkingspot_path(parkingspot) %> (<%= parkingspot.address %>)
-    <% parkingspot.rentals.each do |rental| %>
-    $<%= rental.price %>
-    <% end %>
-    <hr>
-    <% end %>
-    <%= render "managementcalendar" %>
+<div class="container">
+  <div class="fbform">
 
-    Events
-    <% current_user.events.each do |event| %>
-      <p><%= link_to "#{event.title}", event_path(event)%></p>
-      <hr>
-    <% end %>
+    <h1>My Scoop Profile</h1>
 
-    <% current_user.rentals.each do |rental| %>
-      <h3>Parking spot: <%= rental.parkingspot.title %></h3>
-      <% if rental.event != nil %>
+    <div class="box">
+      <%= render "managementcalendar" %>
+    </div>
+
+    <div class="flexmeparkshow">
+
+      <div class="box">
+        <h2>My Parkingspots</h2>
+        <% current_user.parkingspots.each do |parkingspot| %>
+        <% parkingspot.rentals.each do |rental| %>
+        <% bank += rental.price %>
+        <% end %>
+        <%= link_to "#{parkingspot.title}", parkingspot_path(parkingspot) %> (<%= parkingspot.address %>)
+        Total Earnings from this spot: $<%= bank %>
+        <hr>
+        <% end %>
+      </div>
+
+      <div class="box">
+        <h2>My Upcoming reservations</h2>
+        <% current_user.rentals.each do |rental| %>
+        <h3>Parking spot: <%= rental.parkingspot.title %></h3>
+        <% if rental.event != nil %>
         <h3>Event: <%= rental.event.title %></h3>
-      <% end %>
-      Time:(<%= rental.starttime %> - <%= rental.endtime %>)
-      <hr>
-    <% end %>
+        <% end %>
+        Time:(<%= rental.starttime %> - <%= rental.endtime %>)
+        <hr>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

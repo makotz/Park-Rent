@@ -1,0 +1,10 @@
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a {
+  color: #FF6A5C;
+}
+
+#top_nav > div > ul > li > ul > li:nth-child(1) > a,
+#top_nav > div > ul > li > ul > li:nth-child(2) > a,
+#top_nav > div > ul > li > ul > li:nth-child(3) > a,
+#top_nav > div > ul > li > ul > li:nth-child(4) > a {
+  color: #FF6A5C;
+}

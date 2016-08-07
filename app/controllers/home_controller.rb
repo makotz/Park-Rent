@@ -6,6 +6,7 @@ class HomeController < ApplicationController
     @events       = Event.all
     @parkingspot  = Parkingspot.new
     @parkingspots = Parkingspot.all
+    make_markers(@parkingspots)
   end
 
 end

@@ -1,3 +1,35 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#homepage {
+  margin-top: -130px;
+}
+
+#jumbobuttons > a:nth-child(1),
+#jumbobuttons > a:nth-child(2),
+#jumbobuttons > a:nth-child(3) {
+  margin: 20px;
+}
+
+
+
+#section-1 {
+  margin-top: -280px;
+  height: 1000px;
+  width: 100%;
+  background-image: url(/assets/jumbo1.jpg);
+  position: fixed;
+  background-size: cover;
+  z-index: -1;
+}
+
+#section0 {
+  height: 700px;
+  position: relative;
+}
+
+#section1, #section2, #section3 {padding-top:80px;height:800px;  background-color: #CCDFCB;}
+// #section1-5,#section2-5 {height:100px;}
+// #section2 {padding-top:80px;height:800px; background-image: url(/assets/bg.png);}
+// #section3 {padding-top:80px;height:800px; background-image: url(/assets/bg.png);}
+#section4 {padding-top:80px;height:200px; background-color: #056571; color: white;}

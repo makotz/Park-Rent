@@ -31,16 +31,12 @@ class EventsController < ApplicationController
 
   def show
     if current_user
-      @myparkingspots = current_user.parkingspots.near([@event.latitude, @event.longitude], 4000, units: :km)
+      @myparkingspots = current_user.parkingspots.near([@event.latitude, @event.longitude], 1, units: :km)
     else
       @myparkingspots = []
     end
     @eventparking = @event.parkingspots_for_rent
-    @markers_hash = Gmaps4rails.build_markers(@eventparking) do |spot, marker|
-                  marker.lat spot.latitude
-                  marker.lng spot.longitude
-                  marker.infowindow spot.title
-                end
+    make_markers(@parkingspots)
   end
 
   def index
@@ -75,12 +71,16 @@ class EventsController < ApplicationController
   end
 
   def send_notification_email(event)
-    notifyparkingspots = Parkingspot.near([event.latitude, event.longitude], 1, units: :km).where(notification: true)
+    notifyparkingspots = Parkingspot.near([event.latitude, event.longitude], 3, units: :km).where(notification: true)
     if event.notify
       notifyparkingspots.each do |parkingspot|
       ParkmeMailer.notify_parkingspot_owner(event, parkingspot).deliver_now
       end
     end
+  end
+
+  def rental_exists?(spot, event)
+    !Rental.where(parkingspot: spot, event: event).empty?
   end
 
 end

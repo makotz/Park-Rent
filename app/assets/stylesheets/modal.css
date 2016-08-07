@@ -55,16 +55,30 @@
 
 .modal-header {
   padding: 2px 16px;
-  background-color: #5cb85c;
+  background-color: #056571;
   color: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .modal-body {
-  padding: 2px 16px;
+  padding:15px;
 }
 
-.modal-footer {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
+#signinbut {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.close:hover, .close:focus {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: .8;
+    filter: alpha(opacity=50);
+}
+
+#signinmodal > div > div.modal-body > form > input.btn.btn-primary, #new_parkingspot > input.btn.btn-default.btn-primary, #new_event > input.btn.btn-default.btn-primary {
+  background-color: #056571;
 }

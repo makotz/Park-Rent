@@ -11,9 +11,11 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<body data-spy="scroll" data-target=".text-center" data-offset="10px">
   <%= render "/layouts/navbar" %>
-  <%= render "/layouts/noticealerts" %>
+  <%#= render "/layouts/noticealerts" %>
+  <div style="margin-top:130px">
     <%= yield %>
+  </div>
 </body>
 </html>

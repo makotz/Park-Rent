@@ -19,8 +19,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @parkingspot = Parkingspot.new
-    @event = Event.new
   end
 
   def update
@@ -32,18 +30,35 @@ class UsersController < ApplicationController
   end
 
   def managementcalendar
-    parkingspots = current_user.parkingspots
+
     schedule = []
+    reservations = current_user.rentals
+    parkingspots = current_user.parkingspots
+
     parkingspots.each do |parkingspot|
       parkingspot.rentals.each do |rental|
-        rentalschedule = {"title" => rental.user.first_name,
-          "start" => rental.start,
-          "end" => rental.end,
+        if rental.user
+        rentalschedule = {
+          "title" => rental.user.first_name,
+          "start" => rental.starttime,
+          "end" => rental.endtime,
           "url" => parkingspot_path(rental.parkingspot),
-          "color" => "Blue"}
+          "color" => "Blue" }
         schedule << rentalschedule
+        end
       end
     end
+
+    reservations.each do |rental|
+      rentalschedule = {
+        "title" => "#{rental.parkingspot.title} #{rental.event.title}",
+        "start" => rental.starttime,
+        "end" => rental.endtime,
+        "url" => event_path(rental.event),
+        "color" => "Yellow" }
+      schedule << rentalschedule
+    end
+
     schedule.flatten!
     render json: schedule
   end

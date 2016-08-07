@@ -24,7 +24,7 @@
 
 $(document).ready(function(){
 
-  $("body > div > div.alert.alert-dismissible.alert-success").delay(2000).fadeOut('slow');
-  $("body > div > div.alert.alert-dismissible.alert-danger").delay(2000).fadeOut('slow');
+  $("div.alert.alert-dismissible.alert-success").delay(2000).fadeOut('slow');
+  $("div.alert.alert-dismissible.alert-danger").delay(2000).fadeOut('slow');
 
 });

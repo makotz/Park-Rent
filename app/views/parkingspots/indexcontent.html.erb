@@ -21,60 +21,26 @@
       <div class="input-group">
         <input id="parkingspotsearch" type="text" class="form-control" placeholder="Search by address"/>
         <span class="input-group-btn">
-          <button id="parkingspotsearchbutton" class="btn btn-default" type="button">Go!</button>
+          <button id="parkingspotsearchbutton" class="btn btn-cta btn-cta-primary" type="button">Go!</button>
         </span>
       </div>
     </div>
-    </div>
   </div>
+</div>
+
 <% if !@parkingspots.empty? %>
-  <div id='available_parkingspots' class="box col-md-5">
-    <ul class="scrollable-menu">
-    <% @parkingspots.each do |parkingspot| %>
-      <li><h1><%= link_to "#{parkingspot.title}", parkingspot_path(parkingspot) %></h1> (<%= parkingspot.address %>)
-      Price: $<%= parkingspot.default_price %>/hour</li>
-    <% end %>
+  <div class="box flexmeparkindex">
+      <ul class="scrollable-menu box">
+        <div id='available_parkingspots'>
+      <% @parkingspots.each do |parkingspot| %>
+        <li><h1><%= link_to "#{parkingspot.title}", parkingspot_path(parkingspot) %></h1> (<%= parkingspot.address %>)
+        Price: $<%= parkingspot.default_price %>/hour</li>
+      <% end %>
+      </div>
     </ul>
+    <div id="map" style='width: 800px; height: 400px;'></div>
   </div>
 
-<div id="map" style='width: 600px; height: 400px;'></div>
-
-<!-- <div class="box col-md-7">
-  <div class="small-box">
-    <h3>Filter by location</h3>
-      <div class="input-group">
-        <input id="parkingspotsearch" type="text" class="form-control" placeholder="Search by address"/>
-        <span class="input-group-btn">
-          <button id="parkingspotsearchbutton" class="btn btn-default" type="button">Go!</button>
-        </span>
-      </div>
-    </div>
-  </div>
-    <div class="small-box">
-      <div>
-        <h3>Filter by time</h3>
-          <div class="form-group col-md-6 small-box">
-              <div class='input-group date' id='starttime'>
-                  <input type='text' class="form-control" placeholder="Start time"/>
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-          </div>
-      </div>
-      <div>
-          <div class="form-group col-md-6 small-box">
-              <div class='input-group date' id='endtime'>
-                  <input type='text' class="form-control" placeholder="End time" />
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-          </div>
-      </div>
-      <div id="map" style='width: 100%; height: 400px;'></div>
-    </div>
-</div> -->
 <% else %>
   <h2>No parking spots listed</h2>
 <% end %>

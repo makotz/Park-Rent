@@ -1,71 +1,97 @@
 <div class="container">
-  <div class="fbform">
-    <h1><%= @event.title %></h1>
+  <% if flash[:notice] %>
+  <div class="alert alert-dismissible alert-success">
+    <%= flash[:notice] %></div>
+  <% elsif flash[:alert] %>
+  <div class="alert alert-dismissible alert-danger">
+    <%= flash[:alert] %></div>
+  <% end %>
+</div>
 
-    <% if event_owner? %>
+<div class="container">
+  <div class="fbform">
+
+    <div class="box">
+      <h1><%= @event.title %></h1>
+
+      <% if event_owner? %>
       <%= link_to "Edit Event", edit_user_event_path(current_user, @event) %>
       <%= link_to "Delete Event", user_event_path(current_user, @event), method: :delete %>
-    <% end %>
+      <% end %>
 
-    <h4><%= @event.starttime %> ~ <%= @event.endtime %></h4>
-    <h4>Event host: <%= @event.user.full_name %></h4>
-    <h4>Details: <%= @event.description %></h4>
+      <h4><%= @event.starttime %> ~ <%= @event.endtime %></h4>
+      <h4>Event host: <%= @event.user.full_name %></h4>
+      <h4>Details: <%= @event.description %></h4>
+    </div>
 
-    <% if event_owner? || current_user.parkingspots.empty? %>
-    <% elsif @myparkingspots %>
-      <h3>Offer my nearby parkingspot(s)</h3>
-      <% @myparkingspots.each do |parkingspot| %>
-          <%= link_to "#{parkingspot.title}", event_parkingspot_rentals_path(@event, parkingspot), class: "rentspot", method: :post, remote: true%>
+    <div class="flexmeparkshow">
+
+      <div class="flexmeparkshow"style= "flex-direction: column;">
+      <div class="box">
+        <% if current_user && (event_owner? || current_user.parkingspots.empty?) %>
+        <% elsif @myparkingspots %>
+        <h3>Offer my nearby parkingspot(s)</h3>
+        <% @myparkingspots.each do |parkingspot| %>
+        <%= link_to "#{parkingspot.title}", event_parkingspot_rentals_path(@event, parkingspot), class: "rentspot", method: :post%>
         <hr>
-      <% end %>
-    <% else %>
-      <h3>No spots I own are in walking distance</h3>
-    <% end %>
+        <% end %>
+        <% else %>
+        <h3>No spots I own are in walking distance</h3>
+        <% end %>
+      </div>
 
-    <% if @eventparking != [] %>
-      <h3>Available Event Parking (Parking price: $<%= @event.suggested_price %>/hr)</h3>
-      <% @eventparking.each do |parkingspot| %>
+      <div class="box">
+        <% if @eventparking != [] %>
+        <h3>Event Parking ($<%= @event.suggested_price %>/hr)</h3>
+        <% @eventparking.each do |parkingspot| %>
+        <%= parkingspot.title %> (<%= parkingspot.address %>)
         <% if !parkingspot_owner?(parkingspot) && !find_rentals(@event, parkingspot).user%>
-            <%= parkingspot.title %> (<%= parkingspot.address %>)
-            <%= form_tag event_parkingspot_rental_charges_path(@event, parkingspot, find_rentals(@event, parkingspot)) do %>
-              Amount: $<%= find_rentals(@event, parkingspot).price %>
-              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                      data-description=""
-                      data-amount="<%= find_rentals(@event, parkingspot).price*100 %>"
-                      data-locale="auto"></script>
-            <% end %>
-          <% end %>
-      <% end %>
-    <% else %>
-      <h2> No Parkingspots offered at the moment...</h2>
-    <% end %>
+        <%= form_tag event_parkingspot_rental_charges_path(@event, parkingspot, find_rentals(@event, parkingspot)) do %>
+        Amount: $<%= find_rentals(@event, parkingspot).price %>
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+        data-description=""
+        data-amount="<%= find_rentals(@event, parkingspot).price*100 %>"
+        data-locale="auto"></script>
+        <% end %>
+        <% end %>
+        <% end %>
+        <% else %>
+        <h4> No Parkingspots offered at the moment...</h4>
+        <% end %>
+      </div>
+      </div>
 
-    <div class="container-fluid" id="map" style='width: 800px; height: 400px;'></div>
-  <div>
-<div>
+      <div class="box">
+        <div class="container-fluid" id="map" style='width: 800px; height: 400px;'></div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
 
 
 
 <script>
-  handler = Gmaps.build('Google');
-  circle = {lng: <%= @event.longitude %>,
-            lat: <%= @event.latitude %>,
-            radius: 400,
-          }
-  circle_style = { strokeColor: '#009688', strokeOpacity: 1, strokeWeight: 3, fillColor: '#80CBC4' }
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-    eventlocation = handler.addMarkers([
-      {
-        "lat": <%= @event.latitude %>,
-        "lng": <%= @event.longitude %>,
-        "infowindow": "<%= @event.title %>"
-      },
-    ]);
-    markers = handler.addMarkers(<%=raw @markers_hash.to_json %>);
-    handler.bounds.extendWith(eventlocation);
-    handler.fitMapToBounds();
-    handler.getMap().setZoom(15);
-    handler.addCircle(circle, circle_style)
-  });
+handler = Gmaps.build('Google');
+circle = {lng: <%= @event.longitude %>,
+  lat: <%= @event.latitude %>,
+  radius: 400,
+}
+circle_style = { strokeColor: '#009688', strokeOpacity: 1, strokeWeight: 3, fillColor: '#80CBC4' }
+handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  eventlocation = handler.addMarkers([
+    {
+      "lat": <%= @event.latitude %>,
+      "lng": <%= @event.longitude %>,
+      "infowindow": "<%= @event.title %>"
+    },
+  ]);
+  markers = handler.addMarkers(<%=raw @markers_hash.to_json %>);
+  handler.bounds.extendWith(eventlocation);
+  handler.fitMapToBounds();
+  handler.getMap().setZoom(15);
+  handler.addCircle(circle, circle_style)
+});
 </script>

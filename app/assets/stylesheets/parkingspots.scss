@@ -15,3 +15,16 @@
    height: 384px;
    width: 100%;
  }
+
+.flexmeparkshow, .flexmeparkindex {
+  display: flex;
+}
+
+body > div > div:nth-child(2) > div > div.flexmeparkshow > div:nth-child(1) {
+  flex: 1;
+}
+
+.formsizespotnew {
+  margin-left: 120px;
+  margin-right: 120px;
+}

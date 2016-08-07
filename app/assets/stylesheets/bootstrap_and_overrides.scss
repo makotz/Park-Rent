@@ -4,10 +4,30 @@
 @import 'bootstrap-datetimepicker';
 
 // xs (phones), sm (tablets), md (desktops), and lg (larger desktops).
+#map img {
+  max-width: none;
+}
+#map label {
+  width: auto; display:inline;
+}
+
 body {
     font-family: 'Ubuntu';
     background-image:url(/assets/bg.png);
     position: relative;
+    line-height: 1;
+}
+
+
+#starttime > input, #endtime > input, #parkingspotsearch {
+  height:50px;
+}
+
+.input-group-addon {
+  border-radius: 0px;
+}
+#endtime > input, #parkingspotsearch {
+  border-radius: 0px;
 }
 
 a.btn-cta-primary:hover, .btn-cta-primary:hover {
@@ -36,7 +56,8 @@ a.btn-cta, .btn-cta {
     -ms-transition: all 0.4s ease-in-out;
     -o-transition: all 0.4s ease-in-out;
     font-weight: bold;
-    border-radius: 0;
+    border-radius: 0px;
+    padding: 15px 30px;
 }
 a:hover {
     text-decoration: underline;
@@ -55,7 +76,6 @@ a:active, a:hover {
     margin-bottom: 0;
     font-size: 20px;
     font-weight: 400;
-    line-height: 1.42857143;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
@@ -71,9 +91,22 @@ a:active, a:hover {
     border-radius: 4px;
 }
 
-#top_nav {
-  background-color: #414141;
+.welcome-title {
+  padding-top: 160px;
 }
+
+#title1, #title2 {
+  color: white;
+}
+
+#title1 {
+  font-size: 90px;
+}
+
+#title2 {
+  font-size: 60px;
+}
+
 .text-center {
     text-align: center;
 }
@@ -93,38 +126,17 @@ a:active, a:hover {
     max-height: 615px;
 }
 
-#section0 {
-  background-image: url(/assets/jumbo1.jpg);
-  height: 700px;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  position: relative;
+.navbar-default {
+  background-color: white;
 }
-
-.hero-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top:0;
-  left: 0;
-  bottom:0;
-  right:0;
-  background-color: rgba(0,0,0, 0.2);
-}
-
-#section1 {padding-top:50px;height:800px;}
-#section2 {padding-top:50px;height:700px; background-color: violet}
-#section3 {padding-top:50px;height:700px;}
-
 @media only screen and (min-width : 1200px) {
 
   #searchbar {
     width: 100%;
     margin: auto;
     padding: 10px;
-    padding-left: 30%;
-    padding-right: 30%;
+    padding-left: 20%;
+    padding-right: 20%;
     margin-left: auto;
     margin-right: auto;
   }
@@ -152,11 +164,6 @@ a:active, a:hover {
     height: 615px;
   }
 
-  .welcome-title {
-    padding-top: 170px;
-    font-size: 100px;
-  }
-
   .navbar-brand,
   .navbar-nav li a {
       line-height: 80px;
@@ -167,10 +174,6 @@ a:active, a:hover {
 
   .navbar {
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
-  }
-
-  .container {
-      margin-top: 80px;
   }
 
   .jumbopic {
@@ -184,12 +187,13 @@ a:active, a:hover {
     padding-right: 200px
   }
 
-  #calendar {
-   width: 50%;
+  #managementcalendar {
+   width: 70%;
+   align-content: center;
   }
 
  .fbform {
-   background: #CCDFCB;
+   background: white;
    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15),-1px 0 0 rgba(0,0,0,0.03),1px 0 0 rgba(0,0,0,0.03),0 1px 0 rgba(0,0,0,0.12);
    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15),-1px 0 0 rgba(0,0,0,0.03),1px 0 0 rgba(0,0,0,0.03),0 1px 0 rgba(0,0,0,0.12);
    box-shadow: 0 1px 1px rgba(0,0,0,0.15),-1px 0 0 rgba(0,0,0,0.03),1px 0 0 rgba(0,0,0,0.03),0 1px 0 rgba(0,0,0,0.12);
