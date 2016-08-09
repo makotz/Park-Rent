@@ -29,7 +29,9 @@
 }
 
 #section1, #section2, #section3 {padding-top:80px;height:800px;  background-color: #CCDFCB;}
-// #section1-5,#section2-5 {height:100px;}
+#section1-5,#section2-5 {height:30px;}
 // #section2 {padding-top:80px;height:800px; background-image: url(/assets/bg.png);}
 // #section3 {padding-top:80px;height:800px; background-image: url(/assets/bg.png);}
-#section4 {padding-top:80px;height:200px; background-color: #056571; color: white;}
+#section4 {padding-top:80px;height:200px; width: 100%; background-color: #056571; color: white;
+   left:0px;
+   bottom:0px;}

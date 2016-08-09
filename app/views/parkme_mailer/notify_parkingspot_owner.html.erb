@@ -66,10 +66,16 @@ ParkMe Team
     <columns small="12">
 
       <h1>Hi,<%= @owner.first_name %></h1>
-      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, iste, amet consequatur a veniam.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut optio nulla et, fugiat. Maiores accusantium nostrum asperiores provident, quam modi ex inventore dolores id aspernatur architecto odio minima perferendis, explicabo. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima quos quasi itaque beatae natus fugit provident delectus, magnam laudantium odio corrupti sit quam. Optio aut ut repudiandae velit distinctio asperiores?</p>
+      <p class="lead">Today, I wanted to let you know that <%= @event.user.first_name %> is having a <%= @event.title %> near your <%= @parkingspot.title %>.</p>
+      <p>The <%= @event.title %> is from <%= @event.starttime %> until <%= @event.endtime %> and <%= @event.user.first_name %> is requesting $<%= @event.suggested_price %> per hour.</p>
       <callout class="primary">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit repellendus natus, sint ea optio dignissimos asperiores inventore a molestiae dolorum placeat repellat excepturi mollitia ducimus unde doloremque ad, alias eos!</p>
+        <p>If you would like to rent out your <%= @parkingspot.title %>, Click <%= link_to "here", new_session_url %> to sign in and add the spot on the <%= link_to "#{@event.title}", event_url(@event) %> event page.</p>
+      </callout>
+      <callout class="primary">
+        <p>Thank you for using ParkMe,</p>
+      </callout>
+      <callout class="primary">
+        <p>ParkMe Team</p>
       </callout>
     </columns>
   </row>
@@ -86,8 +92,8 @@ ParkMe Team
       </columns>
       <columns large="6">
         <h5>Contact Info:</h5>
-        <p>Phone: 408-341-0600</p>
-        <p>Email: <a href="mailto:foundation@zurb.com">foundation@zurb.com</a></p>
+        <p>Phone: 604-704-1818</p>
+        <p>Email: <a href="mailto:foundation@zurb.com">makoto@parkme.ca</a></p>
       </columns>
     </row>
   </wrapper>

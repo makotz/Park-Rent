@@ -11,8 +11,22 @@
  * file per style scope.
  *
  *= require_tree .
- *= require_self
  *= require fullcalendar
  *= require bootstrap-datepicker
  *= require bootstrap-datetimepicker.min
+ *= require_self
  */
+ .fc th, .fc td {
+   padding-top: 10px;
+   height: 30px;
+ }
+
+#available_parkingspots > div:nth-child(n) > li > h3 > a {
+  color: white;
+  text-decoration: none;
+}
+
+#parkingspotsearchbutton, #sup {
+  padding: 14px 30px;
+  margin: 0px;
+}

@@ -1,3 +1,16 @@
 // Place all the styles related to the events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
+  background-color: #FF6A5C;
+}
+
+h4 {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+h3 > a {
+text-decoration: none;
+}

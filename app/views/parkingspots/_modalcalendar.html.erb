@@ -16,10 +16,13 @@
     </div>
   </div>
 </div>
+<!--End Modal  -->
 
-<h2>Parkingspot Schedule</h2>
+
+<h2 style="display: inline-flex; margin-right: 15px;">Parkingspot Schedule</h2>
 <% if @parkingspot.user != current_user %>
-  <button id="reservationbutton" class="btn btn-primary">Make reservation</button>
+  <button id="reservationbutton" class="btn-cta btn-cta-primary hvr-trim" style="
+    margin-bottom: 20px;">Make reservation</button>
   <script>
   $(document).ready(function() {
     var reservationbutton = document.getElementById('reservationbutton');

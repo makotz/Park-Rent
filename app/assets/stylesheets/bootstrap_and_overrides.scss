@@ -3,6 +3,10 @@
 @import 'bootstrap/glyphicons';
 @import 'bootstrap-datetimepicker';
 
+// .box {
+//   border-style: solid;
+//   border-color: red;
+// }
 // xs (phones), sm (tablets), md (desktops), and lg (larger desktops).
 #map img {
   max-width: none;
@@ -13,33 +17,48 @@
 
 body {
     font-family: 'Ubuntu';
-    background-image:url(/assets/bg.png);
+    // background-image:url(/assets/bg.png);
+    background-color: #CCDFCB;
     position: relative;
     line-height: 1;
+    color: #056571;
 }
 
+#section1 > h1, #section2 > h1, .metoo{
+  margin-top: 20px;
+  text-shadow: 4px 4px 0px rgba(160, 160, 160, 0.53);
+  color: #FF6A5c;
+  font-size: 80px;
+  margin-left: 30px;
+  margin-bottom: -13px;
+}
 
-#starttime > input, #endtime > input, #parkingspotsearch {
-  height:50px;
+.fc th, .fc td {
+  padding-top: 10px;
+  height: 50px;
+}
+
+#starttime > input, #endtime > input, #parkingspotsearch, #eventsearch {
+  height:60px;
 }
 
 .input-group-addon {
   border-radius: 0px;
 }
-#endtime > input, #parkingspotsearch {
+#endtime > input, #parkingspotsearch, #eventsearch {
   border-radius: 0px;
 }
 
 a.btn-cta-primary:hover, .btn-cta-primary:hover {
-    background: #bc515e;
-    border: 2px solid #bc515e;
+    // background: #E9967A	;
+    // border: 2px solid #E9967A	;
     color: #fff;
 }
 .promo .btn-cta {
     font-size: 18px;
 }
 .btn.focus, .btn:focus, .btn:hover {
-    color: #333;
+    color: white;
     text-decoration: none;
 }
 a.btn-cta-primary, .btn-cta-primary {
@@ -101,27 +120,25 @@ a:active, a:hover {
 
 #title1 {
   font-size: 90px;
+  text-shadow: 0px 2px 3px #555;
 }
 
 #title2 {
   font-size: 60px;
+  text-shadow: 0px 1px 1px #555;
 }
 
 .text-center {
     text-align: center;
 }
 
-.box {
-  border-style: solid;
-  border-color: red;
-}
 .small-box {
   border-style: solid;
   border-color: blue;
 }
 
 .scrollable-menu {
-    height: auto;
+    height: 400px;
     overflow-x: hidden;
     max-height: 615px;
 }
@@ -140,6 +157,15 @@ a:active, a:hover {
     margin-left: auto;
     margin-right: auto;
   }
+
+  #searchbar2 {
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+    padding-left: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
   #startsearch {
     width: 30%;
@@ -188,18 +214,17 @@ a:active, a:hover {
   }
 
   #managementcalendar {
-   width: 70%;
    align-content: center;
   }
 
  .fbform {
    background: white;
-   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15),-1px 0 0 rgba(0,0,0,0.03),1px 0 0 rgba(0,0,0,0.03),0 1px 0 rgba(0,0,0,0.12);
-   -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15),-1px 0 0 rgba(0,0,0,0.03),1px 0 0 rgba(0,0,0,0.03),0 1px 0 rgba(0,0,0,0.12);
-   box-shadow: 0 1px 1px rgba(0,0,0,0.15),-1px 0 0 rgba(0,0,0,0.03),1px 0 0 rgba(0,0,0,0.03),0 1px 0 rgba(0,0,0,0.12);
-   border-radius: 2px;
+   background: #fffff8;
+   -webkit-box-shadow: 1px 1px 10px 5px rgba(160, 160, 160, 0.53);
+   -moz-box-shadow: 1px 1px 10px 5px rgba(160, 160, 160, 0.53);
+   box-shadow: 1px 1px 10px 5px rgba(160, 160, 160, 0.53);
    margin: 0 0 16px 0;
-   padding: 10px 20px 20px 20px;
+   padding: 25px 25px 25px 25px;
  }
 
  .jumbotron {

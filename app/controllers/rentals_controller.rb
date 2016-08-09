@@ -48,7 +48,6 @@ class RentalsController < ApplicationController
     else
       redirect_to event_path(event), alert: "Parking for it already exists!"
     end
-
   end
 
   def nonEventRental
@@ -70,6 +69,32 @@ class RentalsController < ApplicationController
   end
 
   def noneventcreatecharge
+    rental = Rental.find params[:rental_id]
+    rental.user = current_user
+    @amount = ((rental.price).round(2)*100).to_i
+
+    customer = Stripe::Customer.create(
+      :email => params[:stripeEmail],
+      :source  => params[:stripeToken]
+    )
+
+    charge = Stripe::Charge.create(
+      :customer    => customer.id,
+      :amount      => @amount,
+      :description => "Invoice for #{rental.parkingspot.user.full_name} from #{rental.user.full_name} for Rental ID: #{rental.id}",
+      :currency    => 'CAD'
+    )
+
+    if rental.save
+      redirect_to parkingspot_path(rental.parkingspot), notice: "Rental reservation has been made! Enjoy the event."
+    else
+      redirect_to parkingspot_path(rental.parkingspot), alert: "Something went wrong with the reservation..."
+    end
+
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to root_path
+
   end
 
   def update

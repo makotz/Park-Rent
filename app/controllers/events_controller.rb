@@ -36,7 +36,7 @@ class EventsController < ApplicationController
       @myparkingspots = []
     end
     @eventparking = @event.parkingspots_for_rent
-    make_markers(@parkingspots)
+    make_markers(@eventparking)
   end
 
   def index

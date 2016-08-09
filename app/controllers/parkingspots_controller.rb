@@ -21,13 +21,22 @@ class ParkingspotsController < ApplicationController
     parkingspot = Parkingspot.find params[:parkingspot_id]
     schedule = []
     parkingspot.rentals.each do |rental|
-      rental_schedule = {
-        "title" => rental.user.first_name,
-        "start" => rental.starttime,
-        "end"   => rental.endtime,
-        "color" => "#056571",
-        "url"   => event_path(rental.event)
-      }
+      if rental.event
+        rental_schedule = {
+          "title" => rental.user.first_name,
+          "start" => rental.starttime,
+          "end"   => rental.endtime,
+          "color" => "#056571",
+          "url"   => event_path(rental.event)
+        }
+      else
+        rental_schedule = {
+          "title" => rental.user.first_name,
+          "start" => rental.starttime,
+          "end"   => rental.endtime,
+          "color" => "#056571"
+        }
+      end
       schedule << rental_schedule
     end
     render json: schedule
@@ -54,25 +63,33 @@ class ParkingspotsController < ApplicationController
         if params[:origin] == "starttime"
           params[:endtime] = DateTime.strptime(params[:endtime], "%m/%d/%Y %I:%M %P")
           params[:starttime] = params[:starttime].to_datetime
+          nono
         elsif params[:origin] == "endtime"
           params[:starttime] = DateTime.strptime(params[:starttime], "%m/%d/%Y %I:%M %P")
           params[:endtime] = params[:endtime].to_datetime
+          nono
         elsif params[:origin] == "search"
-          params[:endtime] = DateTime.strptime(params[:endtime], "%m/%d/%Y %I:%M %P")
-          params[:starttime] = DateTime.strptime(params[:starttime], "%m/%d/%Y %I:%M %P")
-          address_search_bar(params[:location])
+          if params[:endtime] == "" || params[:starttime] == ""
+            @parkingspots = Parkingspot.all
+          else
+            params[:endtime] = DateTime.strptime(params[:endtime], "%m/%d/%Y %I:%M %P")
+            params[:starttime] = DateTime.strptime(params[:starttime], "%m/%d/%Y %I:%M %P")
+            nono
+          end
         end
-      unavailable_spots =  Rental.where(:starttime => params[:starttime]..params[:endtime])
-      unavailable_spots += Rental.where(:endtime   => params[:starttime]..params[:endtime])
-      nono = unavailable_spots.map { |spot| spot.parkingspot.id }.uniq
-      @parkingspots = Parkingspot.where.not(id: nono)
-      if params[:origin] == "search"
-        @parkingspots = @parkingspots.near(@search_location, 2, units: :km)
+
+      if params[:location] != ""
+        address_search_bar(params[:location])
+        @parkingspots = @parkingspots.near(@search_location, 1, units: :km)
       end
+
       make_markers(@parkingspots)
+
     else
+
       @parkingspots = Parkingspot.all
       make_markers(@parkingspots)
+
     end
 
     respond_to do |format|
@@ -95,6 +112,13 @@ class ParkingspotsController < ApplicationController
 
   def find_parkingspot
     @parkingspot = Parkingspot.find params[:id]
+  end
+
+  def nono
+    unavailable_spots =  Rental.where(:starttime => params[:starttime]..params[:endtime])
+    unavailable_spots += Rental.where(:endtime   => params[:starttime]..params[:endtime])
+    nono = unavailable_spots.map { |spot| spot.parkingspot.id }.uniq
+    @parkingspots = Parkingspot.where.not(id: nono)
   end
 
 end

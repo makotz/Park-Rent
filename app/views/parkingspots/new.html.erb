@@ -1,17 +1,17 @@
 <div class="container">
+  <h1 class="metoo" style="margin-left:140px">Register Parkingspot</h1>
   <div class="formsizespotnew">
   <div class="fbform">
-  <legend>Register Parking Spot</legend>
   <%= simple_form_for(@parkingspot, url: user_parkingspots_path(current_user)) do |f| %>
-      <%= f.input :title, label: 'Name', placeholder: "E.g. Ethan's empty garage space" %>
-      <%= f.input :description, placeholder: 'E.g. House with the red chimney!' %>
-      <%= f.input :address, placeholder: 'E.g. 2276 W.18th Avenue' %>
-      <%= f.input :city, placeholder: 'E.g. Vancouver' %>
-      <%= f.input :state, label: 'Province/State', placeholder: 'E.g. B.C.' %>
+      <%= f.input :title, label: 'Name', placeholder: "Ethan's empty garage space" %>
+      <%= f.input :description, placeholder: 'No.18 in the apartment garage' %>
+      <%= f.input :address, placeholder: '2276 W.18th Avenue' %>
+      <%= f.input :city, placeholder: 'Vancouver' %>
+      <%= f.input :state, label: 'Province/State', placeholder: 'B.C.' %>
       <%= f.input :country %>
       <%= f.input :default_price, label: 'Default price per hour ($)'%>
       <%= f.input :notification, label: 'Notify me for events near this spot!'%>
-      <%= f.button :submit, class: "btn btn-primary" %>
+      <%= f.button :submit, class: "btn btn-primary hvr-trim" %>
   <% end %>
   </div>
   </div>

@@ -1,10 +1,8 @@
 <% bank = 0 %>
 
 <div class="container">
+  <h1 class="metoo">My ParkMe Profile</h1>
   <div class="fbform">
-
-    <h1>My Scoop Profile</h1>
-
     <div class="box">
       <%= render "managementcalendar" %>
     </div>
@@ -12,7 +10,7 @@
     <div class="flexmeparkshow">
 
       <div class="box">
-        <h2>My Parkingspots</h2>
+        <h2>My Spots</h2>
         <% current_user.parkingspots.each do |parkingspot| %>
         <% parkingspot.rentals.each do |rental| %>
         <% bank += rental.price %>
@@ -24,7 +22,7 @@
       </div>
 
       <div class="box">
-        <h2>My Upcoming reservations</h2>
+        <h2>Upcoming Reservations</h2>
         <% current_user.rentals.each do |rental| %>
         <h3>Parking spot: <%= rental.parkingspot.title %></h3>
         <% if rental.event != nil %>

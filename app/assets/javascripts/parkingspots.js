@@ -32,13 +32,14 @@ $(document).ready(function () {
           $('#available_parkingspots').append(
             "<a href=" + url + parkingspots[i].id + ">" + parkingspots[i].title + "</a> (" + parkingspots[i].address + ")<hr>"
           )};
-
+          
         $('#map').html("")
         handler = Gmaps.build('Google');
         handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
           markers = handler.addMarkers(markers_hash);
           handler.bounds.extendWith(markers);
           handler.fitMapToBounds();
+
         });
       },
       error: function () {

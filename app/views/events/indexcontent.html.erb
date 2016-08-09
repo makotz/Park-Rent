@@ -1,29 +1,28 @@
 <div class="fbform">
   <div class="flexmeparkshow">
-  <div class="box">
-  <h1>All Events</h1>
-  </div>
-  <% if !@events.empty? %>
-  <div class="box">
+    <% if !@events.empty? %>
+    <div id="searchbar2">
+    <div id="searchbox">
       <div class="input-group">
-        <input id="eventsearch" type="text" class="form-control" placeholder="Search for...">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Go!</button>
+        <input id="eventsearch" type="text" class="form-control" placeholder="Search by event"/>
+        <span class="input-group-btn"  style="display: block;">
+          <button id="sup" class="btn btn-cta btn-cta-primary" type="button">Go!</button>
         </span>
-      </div><!-- /input-group -->
-</div>
-</div>
-<div class="box">
-  <ul class="scrollable-menu">
-  <div id="eventlisting">
-    <% @events.each do |event| %>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="box">
+    <ul class="scrollable-menu">
+      <div id="eventlisting">
+        <% @events.each do |event| %>
         <h2><%= link_to "#{event.title}", event_path(event) %> (<%= event.address %>)</h2>
         <h5><%= event.starttime %> - <%= event.endtime %></h5>
         <% end %>
-    <% else %>
-    <h2>No Events listed</h2>
-    <% end %>
-    </div>
-  </ul>
-</div>
+        <% else %>
+        <h2>No Events listed</h2>
+        <% end %>
+      </div>
+    </ul>
+  </div>
 </div>
