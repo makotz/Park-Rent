@@ -1,7 +1,7 @@
 <div class="container">
+  <h1 class="metoo" style="margin-left:140px; margin-top:-20px;">Add Event</h1>
   <div class="formsizespotnew">
   <div class="fbform">
-  <legend>Add Event</legend>
   <%= simple_form_for(@event, url: user_events_path(current_user)) do |f| %>
       <%= f.input :title, label: "Name", placeholder: 'E.g. House Party' %>
       <div class='row datetimerange'>

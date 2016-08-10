@@ -39,11 +39,11 @@ class UsersController < ApplicationController
       parkingspot.rentals.each do |rental|
         if rental.user
         rentalschedule = {
-          "title" => rental.user.first_name,
+          "title" => "LEASE: #{rental.parkingspot.title}",
           "start" => rental.starttime,
           "end" => rental.endtime,
           "url" => parkingspot_path(rental.parkingspot),
-          "color" => "Blue" }
+          "color" => "#FF6A5C" }
         schedule << rentalschedule
         end
       end
@@ -51,11 +51,11 @@ class UsersController < ApplicationController
 
     reservations.each do |rental|
       rentalschedule = {
-        "title" => "#{rental.parkingspot.title} #{rental.event.title}",
+        "title" => "RENTAL: #{rental.parkingspot.title}",
         "start" => rental.starttime,
         "end" => rental.endtime,
-        "url" => event_path(rental.event),
-        "color" => "Yellow" }
+        "url" => parkingspot_path(rental.parkingspot),
+        "color" => '#056571' }
       schedule << rentalschedule
     end
 

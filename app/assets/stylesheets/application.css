@@ -30,3 +30,17 @@
   padding: 14px 30px;
   margin: 0px;
 }
+
+
+body > div:nth-child(2) > div > div > div.flexmeparkshow > div.flexmeparkshow > div:nth-child(2) > div > form > button.stripe-button-el,
+body > div:nth-child(2) > div > div > div.flexmeparkshow > div.flexmeparkshow > div:nth-child(2) > div > form > button > span {
+  border-radius: 0px;
+  background: #FF6A5C;
+  border: 2px solid #e4696d;
+  color: #fff;
+  font-family: 'Ubuntu';
+}
+
+body > div:nth-child(2) > div > div > div.flexmeparkshow > div.flexmeparkshow > div:nth-child(2) > div > form > button.stripe-button-el {
+  margin-top: 7px;
+}

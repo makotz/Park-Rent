@@ -33,7 +33,7 @@
       <ul class="scrollable-menu box" style="list-style: none; padding-left: 0; padding-right: 20px; width: 40%; display: inline-block; padding-right: 8px; margin-right: 8px;">
         <div id='available_parkingspots'>
       <% @parkingspots.each do |parkingspot| %>
-      <div class="box tile">
+      <div class="box tile hvr-bob" style="display: block">
         <li><h3 style="display:inline-block"><%= link_to "#{parkingspot.title}", parkingspot_path(parkingspot) %></h3> ($<%= (parkingspot.default_price).round(2) %>/hour)
         <h4>(<%= parkingspot.address %>)</h4>
       </div>

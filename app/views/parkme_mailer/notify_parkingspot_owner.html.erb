@@ -1,14 +1,3 @@
-This is Makoto from Parkme.ca.
-Today, I wanted to let you know that <%= @event.user.first_name %> is having a <%= @event.title %> near your <%= @parkingspot.title %>.
-The <%= @event.title %> is from <%= @event.starttime %> until <%= @event.endtime %> and <%= @event.user.first_name %> is requesting
-$<%= @event.suggested_price %> per hour.
-
-If you would like to rent out your <%= @parkingspot.title %>, Click <%= link_to "here", new_session_url %> to sign in and add the spot on the <%= link_to "#{@event.title}", event_url(@event) %> event page.
-
-Thank you for using ParkMe,
-
-ParkMe Team
-
 <style type="text/css">
   .header {
     background: #8a8a8a;
@@ -41,22 +30,21 @@ ParkMe Team
   .wrapper.secondary {
     background: #f3f3f3;
   }
+
+  .icon {
+    width: 40px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .background {
+
+  }
+  
 </style>
 
-
-
-<wrapper class="header">
-  <container>
-    <row class="collapse">
-      <columns small="6">
-        <img src="http://placehold.it/200x50/663399">
-      </columns>
-      <columns small="6">
-        <p class="text-right">BASIC</p>
-      </columns>
-    </row>
-  </container>
-</wrapper>
 
 <container>
 
@@ -65,11 +53,11 @@ ParkMe Team
   <row>
     <columns small="12">
 
-      <h1>Hi,<%= @owner.first_name %></h1>
-      <p class="lead">Today, I wanted to let you know that <%= @event.user.first_name %> is having a <%= @event.title %> near your <%= @parkingspot.title %>.</p>
-      <p>The <%= @event.title %> is from <%= @event.starttime %> until <%= @event.endtime %> and <%= @event.user.first_name %> is requesting $<%= @event.suggested_price %> per hour.</p>
+      <p>Hi <%= @owner.first_name %>,</p>
+      <p class="lead">Today, I wanted to let you know that <%= @event.user.first_name %> is having a <%= @event.title %> near your "<%= @parkingspot.title %>".</p>
+      <p>The <%= @event.title %> is <%= @event.starttime.strftime("on %b %dth from %I:%M %p") %> <%= @event.endtime.strftime("until %I:%M %p") %>and <%= @event.user.first_name %> is requesting $<%= @event.suggested_price %> per hour.</p>
       <callout class="primary">
-        <p>If you would like to rent out your <%= @parkingspot.title %>, Click <%= link_to "here", new_session_url %> to sign in and add the spot on the <%= link_to "#{@event.title}", event_url(@event) %> event page.</p>
+        <p>If you would like to rent out your "<%= @parkingspot.title %>", Click <%= link_to "here", new_session_url %> to sign in and add the spot on the <%= link_to "#{@event.title}", event_url(@event) %> event page.</p>
       </callout>
       <callout class="primary">
         <p>Thank you for using ParkMe,</p>
@@ -86,14 +74,9 @@ ParkMe Team
     <row>
       <columns large="6">
         <h5>Connect With Us:</h5>
-        <button class="facebook expand" href="http://zurb.com">Facebook</button>
-        <button class="twitter expand" href="http://zurb.com">Twitter</button>
-        <button class="google expand" href="http://zurb.com">Google+</button>
-      </columns>
-      <columns large="6">
-        <h5>Contact Info:</h5>
-        <p>Phone: 604-704-1818</p>
-        <p>Email: <a href="mailto:foundation@zurb.com">makoto@parkme.ca</a></p>
+        <%= image_tag ("facebook-logo-button.png") class: "icon"%>
+        <%= image_tag ("twitter-logo-button.png") class: "icon"%>
+        <%= image_tag ("circle.png") class: "icon"%>
       </columns>
     </row>
   </wrapper>

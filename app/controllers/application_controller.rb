@@ -42,20 +42,16 @@ class ApplicationController < ActionController::Base
     return @search_location
   end
 
-  def gmaps4rails_marker_picture
-    {
-     "picture" => "/images/picon.png",
-     "width" => 20,
-     "height" => 20,
-     "marker_anchor" => [ 5, 10]
-    }
-  end
-
   def make_markers(parkingspots)
     @markers_hash = Gmaps4rails.build_markers(parkingspots) do |spot, marker|
       marker.lat spot.latitude
       marker.lng spot.longitude
       marker.infowindow "<a href='/parkingspots/#{spot.id}'>#{spot.title}</a>"
+      marker.picture({
+                   url: "https://s10.postimg.org/5qml818zt/Logo_Makr_3.png",
+                   "width": 75,
+                   "height": 100
+                  })
     end
   end
 

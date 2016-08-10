@@ -30,9 +30,9 @@ $(document).ready(function () {
         $('#available_parkingspots').html("")
         for (var i = 0; i < parkingspots.length; i++) {
           $('#available_parkingspots').append(
-            "<a href=" + url + parkingspots[i].id + ">" + parkingspots[i].title + "</a> (" + parkingspots[i].address + ")<hr>"
+            "<div class='box tile hvr-bob' style='display: block'><li><h3 style='display:inline-block'><a href=" + url + parkingspots[i].id + ">" + parkingspots[i].title + "</a></h3>&nbsp;($"+ parkingspots[i].default_price+ "/hour)<h4>(" + parkingspots[i].address + ")</h4></li></div>"
           )};
-          
+
         $('#map').html("")
         handler = Gmaps.build('Google');
         handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
@@ -72,7 +72,7 @@ $(document).ready(function () {
         $('#available_parkingspots').html("")
         for (var i = 0; i < parkingspots.length; i++) {
           $('#available_parkingspots').append(
-            "<a href=" + url + parkingspots[i].id + ">" + parkingspots[i].title + "</a> (" + parkingspots[i].address + ")<hr>"
+            "<div class='box tile hvr-bob' style='display: block'><li><h3 style='display:inline-block'><a href=" + url + parkingspots[i].id + ">" + parkingspots[i].title + "</a></h3>&nbsp;($"+ parkingspots[i].default_price+ "/hour)<h4>(" + parkingspots[i].address + ")</h4></li></div>"
           )};
 
         $('#map').html("")
@@ -112,7 +112,7 @@ $(document).ready(function () {
         $('#available_parkingspots').html("")
         for (var i = 0; i < parkingspots.length; i++) {
           $('#available_parkingspots').append(
-            "<a href=" + url + parkingspots[i].id + ">" + parkingspots[i].title + "</a> (" + parkingspots[i].address + ")<hr>"
+            "<div class='box tile hvr-bob' style='display: block'><li><h3 style='display:inline-block'><a href=" + url + parkingspots[i].id + ">" + parkingspots[i].title + "</a></h3>&nbsp;($"+ parkingspots[i].default_price+ "/hour)<h4>(" + parkingspots[i].address + ")</h4></li></div>"
           )};
 
         $('#map').html("")

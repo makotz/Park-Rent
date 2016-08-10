@@ -23,10 +23,10 @@ class ParkingspotsController < ApplicationController
     parkingspot.rentals.each do |rental|
       if rental.event
         rental_schedule = {
-          "title" => rental.user.first_name,
+          "title" => "RESERVED: #{rental.user.first_name}",
           "start" => rental.starttime,
           "end"   => rental.endtime,
-          "color" => "#056571",
+          "color" => '#056571',
           "url"   => event_path(rental.event)
         }
       else
@@ -34,7 +34,7 @@ class ParkingspotsController < ApplicationController
           "title" => rental.user.first_name,
           "start" => rental.starttime,
           "end"   => rental.endtime,
-          "color" => "#056571"
+          "color" => '#056571'
         }
       end
       schedule << rental_schedule

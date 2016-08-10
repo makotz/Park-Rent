@@ -14,3 +14,29 @@ h4 {
 h3 > a {
 text-decoration: none;
 }
+
+#event_starttime, #event_endtime {
+  width: 370px;
+}
+
+#new_event > div.row.datetimerange > div.form-group.col-md-6.datetime_picker.required.event_starttime > div > span > button,
+#new_event > div.row.datetimerange > div.form-group.col-md-6.datetime_picker.required.event_endtime > div > span > button {
+  height: 34px;
+}
+
+#new_event > div.row.datetimerange > div.form-group.col-md-6.datetime_picker.required.event_starttime > div > span,
+#new_event > div.row.datetimerange > div.form-group.col-md-6.datetime_picker.required.event_endtime > div > span,
+#new_rental > div.row.datetimerange > div.form-group.col-md-6.datetime_picker.optional.rental_starttime > div > span,
+#new_rental > div.row.datetimerange > div.form-group.col-md-6.datetime_picker.optional.rental_endtime > div > span {
+  display: inline-block;
+}
+
+#rental_starttime, #rental_endtime {
+  width: 190px;
+}
+
+
+#new_rental > div.row.datetimerange > div.form-group.col-md-6.datetime_picker.optional.rental_starttime > div > span > button,
+#new_rental > div.row.datetimerange > div.form-group.col-md-6.datetime_picker.optional.rental_endtime > div > span > button {
+  height: 34px;
+}

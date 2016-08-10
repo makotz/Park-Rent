@@ -1,0 +1,21 @@
+.icon {
+  width: 40px;
+  height: auto;
+  margin: 10px;
+}
+
+
+.stripe-button-el {
+  border-radius: 0px;
+  background: #FF6A5C;
+  border: 2px solid #e4696d;
+  color: #fff;
+}
+
+.ftr-icon {
+  flex: right;
+  margin: 10px;
+  margin-bottom: 20px;
+  width: 70px;
+  height: auto;
+}
