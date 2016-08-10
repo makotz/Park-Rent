@@ -27,6 +27,7 @@
 }
 
 #parkingspotsearchbutton, #sup {
+  height: 61px;
   padding: 14px 30px;
   margin: 0px;
 }

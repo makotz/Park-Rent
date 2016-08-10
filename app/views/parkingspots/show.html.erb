@@ -10,58 +10,58 @@
 
         <h4><%= image_tag ('user.png'), class:"icon" %>Owned by <%= @parkingspot.user.full_name %></h4>
         <h4><%= image_tag ('dollar-coin-money.png'), class:"icon" %>Price per hour: $<%= @parkingspot.default_price %></h4>
-        <h4><%= image_tag ('draw.png'), class:"icon" %>Details: <%= @parkingspot.description %></h4>
+        <h4><%= image_tag ('draw.png'), class:"icon" %><%= @parkingspot.description %></h4>
         <!-- The Modal -->
-        <div id="myModal" class="modal container" style="z-index: 10">
-          <div class="modal-content" >
-            <div class="modal-header">
-              <span class="close">×</span>
-              <h2>Make Reservation</h2>
-            </div>
-            <div class="modal-body">
-              <%= simple_form_for(@rental, url: parkingspot_rentals_path(@parkingspot), method: :get) do |f| %>
-              <%= f.input :plateNumber, label: "Plate Number" %>
-              <div class='row datetimerange'>
-                <%= f.input :starttime, label: "Starts at", as: :datetime_picker, wrapper: :ranged_datetime %>
-                <%= f.input :endtime, label: "Ends at", as: :datetime_picker, wrapper: :ranged_datetime %>
-              </div>
-              <%= f.button :submit, class: "btn btn-primary" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <!--End Modal  -->
-
-
-        <% if @parkingspot.user != current_user %>
-          <button id="reservationbutton" class="btn-cta btn-cta-primary hvr-bob" style="
-            margin-left: 15px; margin-top: 10px; padding: 20px;">Reserve Spot</button>
-          <script>
-          $(document).ready(function() {
-            var reservationbutton = document.getElementById('reservationbutton');
-            var modal = document.getElementById('myModal');
-            var span = document.getElementsByClassName("close")[0];
-            reservationbutton.onclick = function() {
-              modal.style.display = "block";
-            }
-            span.onclick = function() {
-              modal.style.display = "none";
-            }
-            window.onclick = function(event) {
-              if (event.target == modal) {
-                modal.style.display = "none";
-              }
-            }
-          });
-          </script>
-        <% end %>
+<div id="myModal" class="modal container" style="z-index: 10">
+  <div class="modal-content" >
+    <div class="modal-header">
+      <span class="close">×</span>
+      <h2>Make Reservation</h2>
+    </div>
+    <div class="modal-body">
+      <%= simple_form_for(@rental, url: parkingspot_rentals_path(@parkingspot), method: :get) do |f| %>
+      <%= f.input :plateNumber, label: "Plate Number" %>
+      <div class='row datetimerange'>
+        <%= f.input :starttime, label: "Starts at", as: :datetime_picker, wrapper: :ranged_datetime %>
+        <%= f.input :endtime, label: "Ends at", as: :datetime_picker, wrapper: :ranged_datetime %>
       </div>
+      <%= f.button :submit, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!--End Modal  -->
+<% if @parkingspot.user != current_user %>
+  <button id="reservationbutton" class="btn-cta btn-cta-primary hvr-bob" style="
+    margin-left: 15px; margin-top: 10px; padding: 20px;">Reserve Spot</button>
+  <script>
+  $(document).ready(function() {
+    var reservationbutton = document.getElementById('reservationbutton');
+    var modal = document.getElementById('myModal');
+    var span = document.getElementsByClassName("close")[0];
+    reservationbutton.onclick = function() {
+      modal.style.display = "block";
+    }
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  });
+  </script>
+<% end %>
+</div>
 
       <div class="box">
         <div id="map"style='width: 600px; height: 300px;'></div>
       </div>
     </div>
-    <div class="box" style="margin-top: 35px">
+
+
+    <div class="box" style="margin-top: 20px">
       <%= render "modalcalendar" %>
     </div>
   </div>
@@ -76,9 +76,9 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
       "lng": <%= @parkingspot.longitude %>,
       "infowindow": "<%= @parkingspot.title %>",
       "picture": {
-        "url": "http://i.imgur.com/IwlKpmF.png?1",
-        "width": 90,
-        "height": 90
+        "url": "http://i.imgur.com/ocF29u7.png?2",
+        "width": 60,
+        "height": 95
       }
     }
   ]);

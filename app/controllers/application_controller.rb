@@ -48,9 +48,9 @@ class ApplicationController < ActionController::Base
       marker.lng spot.longitude
       marker.infowindow "<a href='/parkingspots/#{spot.id}'>#{spot.title}</a>"
       marker.picture({
-                   url: "https://s10.postimg.org/5qml818zt/Logo_Makr_3.png",
-                   "width": 75,
-                   "height": 100
+                   url: "http://funkyimg.com/i/2fesC.png",
+                   "width": 64,
+                   "height": 64
                   })
     end
   end

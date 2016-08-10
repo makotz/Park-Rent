@@ -6,7 +6,7 @@
         <div class="input-group">
           <input id="eventsearch" type="text" class="form-control" placeholder="Search by event"/>
           <span class="input-group-btn"  style="display: block;">
-            <button id="sup" class="btn btn-cta btn-cta-primary" type="button">Go!</button>
+            <button id="sup" class="btn btn-cta btn-cta-primary hvr-trim" type="button">Go!</button>
           </span>
         </div>
       </div>
@@ -16,7 +16,7 @@
     <ul class="scrollable-menu" style="list-style: none; padding-left: 0; padding-right: 20px; width: 100%; display: inline-block; padding-right: 8px; margin-right: 8px;">
       <div id="eventlisting">
         <% @events.each do |event| %>
-        <div class="box tile hvr-bob" style="display: block">
+        <div class="box tile hvr-underline-from-left" style="display: block">
           <li><h3 style="display: inline-block"><%= link_to "#{event.title}", event_path(event), style: "color: white;
     text-decoration: none;"%></h3>&nbsp;<h4 style="display: inline-block;">(<%= event.address %>)</h4>
             <h5><%= event.starttime.strftime("On %b %dth from %I:%M %p") %> <%= event.endtime.strftime("until %I:%M %p") %></h5></li>

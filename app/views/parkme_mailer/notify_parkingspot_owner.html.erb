@@ -42,7 +42,7 @@
   .background {
 
   }
-  
+
 </style>
 
 
@@ -55,7 +55,7 @@
 
       <p>Hi <%= @owner.first_name %>,</p>
       <p class="lead">Today, I wanted to let you know that <%= @event.user.first_name %> is having a <%= @event.title %> near your "<%= @parkingspot.title %>".</p>
-      <p>The <%= @event.title %> is <%= @event.starttime.strftime("on %b %dth from %I:%M %p") %> <%= @event.endtime.strftime("until %I:%M %p") %>and <%= @event.user.first_name %> is requesting $<%= @event.suggested_price %> per hour.</p>
+      <p>The <%= @event.title %> is <%= @event.starttime.strftime("on %b %dth from %I:%M %p") %> <%= @event.endtime.strftime("until %I:%M %p") %> and <%= @event.user.first_name %> is requesting $<%= @event.suggested_price %> per hour.</p>
       <callout class="primary">
         <p>If you would like to rent out your "<%= @parkingspot.title %>", Click <%= link_to "here", new_session_url %> to sign in and add the spot on the <%= link_to "#{@event.title}", event_url(@event) %> event page.</p>
       </callout>
@@ -70,14 +70,5 @@
   <wrapper class="secondary">
 
     <spacer size="16"></spacer>
-
-    <row>
-      <columns large="6">
-        <h5>Connect With Us:</h5>
-        <%= image_tag ("facebook-logo-button.png") class: "icon"%>
-        <%= image_tag ("twitter-logo-button.png") class: "icon"%>
-        <%= image_tag ("circle.png") class: "icon"%>
-      </columns>
-    </row>
   </wrapper>
 </container>

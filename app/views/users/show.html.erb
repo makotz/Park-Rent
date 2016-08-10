@@ -9,30 +9,34 @@
 
     <div class="flexmeparkshow">
 
-      <div class="box">
+      <div style="width: 50%">
         <h2>My Spots</h2>
         <% current_user.parkingspots.each do |parkingspot| %>
         <% parkingspot.rentals.each do |rental| %>
         <% bank += rental.price %>
         <% end %>
-        <%= link_to "#{parkingspot.title}", parkingspot_path(parkingspot) %> (<%= parkingspot.address %>)
-        Total Earnings from this spot: $<%= bank %>
-        <hr>
+        <div class="box tile hvr-underline-from-left" style="display: block">
+          <h4 style="display: inline-block"><%= link_to "#{parkingspot.title}", parkingspot_path(parkingspot), style: "color: white;
+          text-decoration: none;"%></h4>&nbsp;<h5 style="display: inline-block;">(<%= parkingspot.address %>)</h5>
+          <h5>Total Earnings from this spot: $<%= bank %></h5>
+        </div>
         <% end %>
       </div>
 
-      <div class="box">
+      <div style="width: 50%">
         <h2>Upcoming Reservations</h2>
+        <% if current_user.rentals %>
         <% current_user.rentals.each do |rental| %>
-        <h3>Parking spot: <%= rental.parkingspot.title %></h3>
-        <% if rental.event != nil %>
-        <h3>Event: <%= rental.event.title %></h3>
+        <div class="box tile hvr-underline-from-left" style="display: block">
+          <h4 style="display: inline-block">Spot: <%= rental.parkingspot.title %></h4>
+          <% if rental.event != nil %>
+          <% end %>
+          <h5><%= rental.starttime.strftime("%b %dth from %I:%M %p") %> <%= rental.endtime.strftime("until %I:%M %p") %></h5>
+        </div>
         <% end %>
-        Time:(<%= rental.starttime %> - <%= rental.endtime %>)
-        <hr>
         <% end %>
       </div>
 
     </div>
+
   </div>
-</div>

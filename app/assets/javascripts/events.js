@@ -15,7 +15,7 @@ $(document).ready(function () {
         if (data.length != 0) {
           for (var i = 0; i < data.length; i++) {
             $('#eventlisting').append(
-              "<div class='box tile hvr-bob' style='display: block'><li><h3 style='display: inline-block'><a href=" + "/events/" + data[i].id + " style='color: white; text-decoration: none;'>" + data[i].title + "</a></h3>&nbsp;<h4 style='display: inline-block;'>(" + data[i].address + ")</h4><h5>"+ data[i].starttime +" - "+data[i].endtime +")</h5>"
+              "<div class='box tile hvr-underline-from-left' style='display: block'><li><h3 style='display: inline-block'><a href=" + "/events/" + data[i].id + " style='color: white; text-decoration: none;'>" + data[i].title + "</a></h3>&nbsp;<h4 style='display: inline-block;'>(" + data[i].address + ")</h4><h5>"+ data[i].starttime +" - "+data[i].endtime +")</h5>"
             )
           };
         } else {

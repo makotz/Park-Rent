@@ -20,7 +20,7 @@
               <h4>Offer My Spot(s)</h4>
             <% @myparkingspots.each do |parkingspot| %>
               <% if !find_rentals(@event, parkingspot) %>
-              <div class="box tile hvr-bob" style="display: block; margin-left: 0px;">
+              <div class="box tile hvr-underline-from-left" style="display: block; margin-left: 0px;">
                 <h4 style="display:inline-block"><%= link_to "#{parkingspot.title}", event_parkingspot_rentals_path(@event, parkingspot), class: "rentspot", style: "color: white; text-decoration: none;", method: :post%></h4>
               </div>
               <% end %>
@@ -82,9 +82,9 @@
         "lng": <%= @event.longitude %>,
         "infowindow": "<%= @event.title %>",
         "picture": {
-          "url": "http://i.imgur.com/kJazLC2.png?2",
-          "width": 40,
-          "height": 40
+          "url": "http://funkyimg.com/i/2feqw.png",
+          "width": 64,
+          "height": 64
         }
       },
     ]);

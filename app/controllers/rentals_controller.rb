@@ -14,7 +14,7 @@ class RentalsController < ApplicationController
     charge = Stripe::Charge.create(
       :customer    => customer.id,
       :amount      => @amount,
-      :description => "Invoice: To #{rental.parkingspot.user.full_name} from #{rental.user.full_name} for #{@amount} CAD (Transaction ID: #{rental.id}) in use of #{rental.parkingspot.title} on the #{rental.starttime.strftime('%b %dth from %I:%M %p')} #{rental.endtime.strftime('until %I:%M %p')}",
+      :description => "Invoice: To #{rental.parkingspot.user.full_name} from #{rental.user.full_name} for #{(@amount)/100.0} CAD (Transaction ID: #{rental.id}) in use of #{rental.parkingspot.title} on the #{rental.starttime.strftime('%b %dth from %I:%M %p')} #{rental.endtime.strftime('until %I:%M %p')}",
       :currency    => 'CAD'
     )
 
@@ -81,7 +81,7 @@ class RentalsController < ApplicationController
     charge = Stripe::Charge.create(
       :customer    => customer.id,
       :amount      => @amount,
-      :description => "Invoice: To #{rental.parkingspot.user.full_name} from #{rental.user.full_name} for #{@amount} CAD (Transaction ID: #{rental.id})",
+      :description => "Invoice: To #{rental.parkingspot.user.full_name} from #{rental.user.full_name} for #{(@amount)/100.0} CAD (Transaction ID: #{rental.id}) in use of #{rental.parkingspot.title} on the #{rental.starttime.strftime('%b %dth from %IP:%M %p')} #{rental.endtime.strftime('until %I:%M %p')}",
       :currency    => 'CAD'
     )
 

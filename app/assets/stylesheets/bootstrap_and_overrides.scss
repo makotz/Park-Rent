@@ -24,7 +24,7 @@ body {
     color: #056571;
 }
 
-#section1 > h1, #section2 > h1, .metoo{
+#section1 > h1, #section2 > h1, #section3 > h1, .metoo{
   margin-top: 20px;
   text-shadow: 4px 4px 0px rgba(160, 160, 160, 0.53);
   color: #FF6A5c;
@@ -40,6 +40,10 @@ body {
 
 #starttime > input, #endtime > input, #parkingspotsearch, #eventsearch {
   height:60px;
+}
+
+#eventsearch {
+  width: 350px;
 }
 
 .input-group-addon {
@@ -162,7 +166,7 @@ a:active, a:hover {
     width: 100%;
     margin: auto;
     padding: 10px;
-    padding-left: 40%;
+    padding-left: 30%;
     margin-left: auto;
     margin-right: auto;
 }
